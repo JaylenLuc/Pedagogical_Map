@@ -3,6 +3,8 @@
 import folium
 import pandas as pd
 import json
+import requests
+import api_mod
 
 main_map = folium.Map(
     location=[39.9042, 116.4074],   
@@ -17,6 +19,13 @@ maps = dict(Grey='https://server.arcgisonline.com/arcgis/rest/services/Canvas/Wo
             Topographical='https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer',
             Terrain= 'https://services.arcgisonline.com/arcgis/rest/services/World_Terrain_Base/MapServer'
             )
+
+
+
+
+
+
+
 
 
 # https://leafletjs.com/reference-1.7.1.html#path
@@ -98,12 +107,18 @@ class nation:
             'fillColor':f'{fillColors}',
             'fillOpacity' : .2
         }
-        name_n.add_child(folium.GeoJson(
+        #included in the tooltip popup:: 
+        geo = folium.GeoJson(
             i,
-            tooltip = folium.GeoJsonTooltip(fields=('ADMIN',),
-            aliases=('Nation-State',)),
+            tooltip = folium.GeoJsonTooltip(fields=('ADMIN','ISO_A3',), aliases=('Nation-State','ALPHA3',)),
+            #tooltip = folium.Tooltip(),
             show = True,
-            style_function=lambda x:bordersStyle))
+            style_function=lambda x:bordersStyle)
+        popup = folium.Popup('Hi')
+        popup.add_to(geo)
+        name_n.add_child(geo)
+        #geo.add_to(main_map)
+
         #.add_to(main_map)
         #nation.classification.append(new_country)
 
