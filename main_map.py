@@ -1,5 +1,6 @@
 #interactive map
 #jaylen ho luc
+
 import folium
 import pandas as pd
 import json
@@ -7,6 +8,7 @@ import api_mod as api
 import time
 from folium.plugins import MousePosition
 from alive_progress import alive_bar; import time
+
 start1 = time.time()
 
 main_map = folium.Map(
@@ -86,20 +88,20 @@ country_object = api.server_fetch()
 class nation:
     classification = []
     style_func_time = 0
-    Sinosphere = ['CHN','PRK','KOR','JPN','TWN','SGP','VNM']
+    Sinosphere = ['MAC','HKG','CHN','PRK','KOR','JPN','TWN','SGP','VNM']
     Indo_China = ['LAO','THA','MMR','KHM','PHL','MYS','IDN','TLS']
     Hindustan = ['IND','PAK','BGD','LKA']
     Middle_East = ['IRN','IRQ','SYR','SYR','ISR','PSE','LBN',\
         'SAU','YEM','OMN','ARE','QAT','BHR','KWT','AFG','JOR']
     Turkistan = ['TKM','UZB','KAZ','KGZ','TJK','MNG']
-    The_West = ['GIB','SMR','VAT','MLT','ESP','PRT','FRA','BEL','NLD','GBR','IRL',\
+    The_West = ['BMU','ALA','GIB','SMR','VAT','MLT','ESP','PRT','FRA','BEL','NLD','GBR','IRL',\
         'DEU','LUX','ITA','AND','CHE','AUT','DNK','NOR','SWE','FIN','EST','FRO','ISL',\
         'GRL','MCO','AUS','NZL']
     The_Orthodoxy = ['POL','LTU','LVA','BLR','UKR','CZE','SVK','HUN'\
         'ROU','BGR','HRV','SVN','BIH','GRC','TUR','MKD','ALB','RUS','CYP',\
         'SRB','MNE','MDA','ROU','HUN']
     Cushite = ['ETH','ERI','SOM','DJI']
-    West_Africa = ['CIV','GHA','NGA','BEN','TGO','BFA','LBR','SLE','GIN','SEN',\
+    West_Africa = ['CPV','CIV','GHA','NGA','BEN','TGO','BFA','LBR','SLE','GIN','SEN',\
         'GNB','MLI','NER','CMR','GNQ','GAB']
     Bantoid = ['CAF','COD','COG','UGA','KEN','TZA','ZMB','AGO','MWI',\
         'MOZ','ZWE','NAM','BWA','RWA','BDI']
@@ -109,8 +111,8 @@ class nation:
     Caucauses = ['GEO','ARM','AZE']
     Madagascar = ['COM','MDG','MUS']
     Melanesia = ['PNG','SLB','VUT','NCL']
-    Micronesia = ['MHL','MNP','GUM','PLW','NRU','KIR']
-    Polynesia = ['WSM','TUV','WLF','NIU','TON','NFK','COK','PCN','FJI']
+    Micronesia = ['FSM','MHL','MNP','GUM','PLW','NRU','KIR']
+    Polynesia = ['PYF','WSM','TUV','WLF','NIU','TON','NFK','COK','PCN','FJI']
     Himilayas = ['NPL','BTN']
     Euro_North = ['USA','CAN']
     Mexica = ['MEX','BLZ','GTM','HND','SLV','NIC','CRI','PAN']
@@ -147,16 +149,20 @@ class nation:
             #tooltip = folium.GeoJsonTooltip(fields=('ADMIN','ISO_A3',), aliases=('Nation-State','ALPHA3',)),
             tooltip= folium.Tooltip(text=folium.Html(html, script=True,width=400).render()),
             show = True,
+            control = False,
+            zoom_on_click = True,
             style_function=lambda x:bordersStyle)
-        popup = folium.Popup('Hi')
+        popup = folium.Popup('Hi') #main thingy thing
         popup.add_to(geo)
-        name_n.add_child(geo)
+        #name_n.add_child(geo)
+        main_map.add_child(geo)
+
         #geo.add_to(main_map)
 
         #.add_to(main_map)
         #nation.classification.append(new_country)
 ugh = time.time()
-with open(r'C:\Users\Jaylen\Desktop\projects\countries.geojson') as open_f: #replace file path of the countries geojson file
+with open(r'countries.geojson') as open_f: #replace file path of the countries geojson file
     country_r = json.loads(open_f.read())
 ughe = time.time()
 print(f'open file: {ughe-ugh}')
@@ -340,6 +346,111 @@ for map_name, url in maps.items():
         attr='My attr').add_to(main_map)
 #fg=folium.FeatureGroup(name='CIvilization', show=False)
 #main_map.add_child(fg)
+
+#adding cities to map
+caps = folium.FeatureGroup(name='Capitals',show=False)
+first = folium.FeatureGroup(name='First Level Admin Capital',show=False)
+lower = folium.FeatureGroup(name='Lower Level Admin Capital',show=False)
+prov = folium.FeatureGroup(name='Province',show=False)
+csvfile = pd.read_csv((r'worldcities.csv'))
+capitals = csvfile[(csvfile['capital'] == 'primary')]
+fir = csvfile[(csvfile['capital'] == 'admin')]
+lowe = csvfile[(csvfile['capital'] == 'minor')]
+#provinces = csvfile[(csvfile['capital'] == '')]
+#popu = csvfile['population']
+#icon = folium.features.CustomIcon('star.png',icon_size=(14, 14))
+icon = "folium.Icon(color='red')" #High Population (>7,000,000)
+icon2 = "folium.Icon(color='orange')"#'Medium Population (between 2,000,000 and 7,000,000)
+icon3 = "folium.Icon(color='lightblue')"#Low Population (<2,000,000)
+
+string1 = "first.add_child(folium.Marker("+\
+        "location=[i['lat'], i['lng']],"+\
+        "popup=folium.Popup(html=f'<style>pz {{color:{colors}; display:inline;}}</style>'+f'<b>First Level Admin Capital:</b> \
+            {c}<br><b>Population:<b> <pz>{pop}</pz><br><b>Coordinates:</b>{long}º E / {lat}º N',"+\
+        "max_width= 200),"+\
+       " tooltip=f'<b>First subdivision Capital city:</b> {ci}',"
+
+string2 = "caps.add_child(folium.Marker("+\
+        "location=[v['lat'], v['lng']],"+\
+        "popup=folium.Popup(html=f'<style>pz {{color:{colors}; display:inline;}}</style>'+f'<b>Capital city of:</b> \
+            {vc}<br><b>Population:</b><pz> {vpop}</pz><br><b>Coordinates:</b>{vlong}º E / {vlat}º N',"+\
+        "max_width= 200),"+\
+       " tooltip=f'<b>Capital city:</b> {vci}',"
+string3 = "lower.add_child(folium.Marker("+\
+        "location=[ll['lat'], ll['lng']],"+\
+        "popup=folium.Popup(html=f'<style>pz {{color:{colors}; display:inline;}}</style>'+f'<b>Lower Level Admin Capital city of:</b> \
+            {lc}<br><b>Population:</b> <pz>{lpop}</pz><br><b>Coordinates:</b>{llong}º E / {llat}º N',"+\
+        "max_width= 200),"+\
+       " tooltip=f'<b>Lower subdivision Capital city:</b> {lci}',"
+
+        
+for (vind, v), (iind, i), (lind, ll) in zip(capitals.iterrows(),fir.iterrows(), lowe.iterrows()):
+    ci,c,pop,lat,long = i['city'],i['admin_name'],i['population'],i['lat'],i['lng']
+    vci,vc,vpop,vlat,vlong = v['city'],v['country'],v['population'],v['lat'],v['lng']
+    lci,lc,lpop,llat,llong = ll['city'],ll['country'],ll['population'],ll['lat'],ll['lng']
+    
+    
+    
+    if float(pop) >= 7000000:
+        colors = 'red'
+        exec(string1 + f"icon= {icon}))")
+    
+    elif float(pop) < 7000000 and float(i['population']) >= 1000000 :
+        colors = 'orange'
+        exec(string1 + f"icon= {icon2}))")
+    elif float(pop) < 1000000:
+        colors = 'lightblue'
+        exec(string1 + f"icon= {icon3}))")
+    
+    if float(vpop) >= 7000000:
+        colors = 'red'
+        exec(string2 + f"icon= {icon}))")
+
+    elif float(vpop) < 7000000 and float(vpop) >= 1000000 :
+        colors = 'orange'
+        exec(string2 + f"icon= {icon2}))")
+
+    elif float(vpop) < 1000000:
+        colors = 'lightblue'
+        exec(string2 + f"icon= {icon3}))")
+
+    if float(vpop) >= 7000000:
+        colors = 'red'
+        exec(string3 + f"icon= {icon}))")
+
+    elif float(vpop) < 7000000 and float(vpop) >= 1000000 :
+        colors = 'orange'
+        exec(string3 + f"icon= {icon2}))")
+
+    elif float(vpop) < 1000000:
+        colors = 'lightblue'
+        exec(string3 + f"icon= {icon3}))")
+    '''
+    if float(vpop) >= 7000000:
+        exec(string4 + f"icon= {icon}))")
+
+    elif float(vpop) < 7000000 and float(vpop) >= 1000000 :
+        exec(string4 + f"icon= {icon2}))")
+
+    elif float(vpop) < 1000000:
+        exec(string4 + f"icon= {icon3}))")
+    '''
+    
+
+
+main_map.add_child(caps)
+main_map.add_child(first)
+main_map.add_child(lower)
+#main_map.add_child(prov)
+
+'''
+main_map.add_child(pop1)
+main_map.add_child(pop2)
+main_map.add_child(pop3)
+
+
+
+
 main_map.add_child(sino)
 main_map.add_child(indo)
 main_map.add_child(hindu)
@@ -366,12 +477,14 @@ main_map.add_child(Gran_colombia )
 main_map.add_child(Euro_Hispanic )
 main_map.add_child(Caribbean )
 main_map.add_child(him )
+'''
 folium.TileLayer('Stamen Terrain').add_to(main_map)
 folium.TileLayer('cartodbdark_matter').add_to(main_map)
 folium.TileLayer('Stamen Toner').add_to(main_map)
 folium.TileLayer('Stamen Water Color').add_to(main_map)
 folium.TileLayer('cartodbpositron').add_to(main_map)
 folium.LayerControl().add_to(main_map)
+
 end1 = time.time()
 print(f'System runtime: {end1-start1} seconds')
 print(f'form_str func time: {func_time} seconds')

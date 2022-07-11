@@ -68,11 +68,12 @@ class server_fetch:
         print(self.money)
 
 
-    def in_fetch(self):
-        self.income  = requests.get('http://api.worldbank.org/v2/country?format=json').json()
     
     def get_income(self,code):
-        return requests.get(f'http://api.worldbank.org/v2/country/{code}?format=json').json()
+        try:
+            return requests.get(f'http://api.worldbank.org/v2/country/{code}?format=json').json()
+        except:
+            return 'N/A'
 
     def form_str(self,code):
         #most  ofthe time is taken here
@@ -132,13 +133,19 @@ class server_fetch:
                     income = income[1][0]['incomeLevel']['value']
                 except:
                     income = 'N\A'
-                
+                try:
+                    capital = server_fetch.response[i]['capital'][0]
+                except(KeyError):
+                    capital = 'N/A'
+
+
+
                 if len(lang) != 0: lang += '</br>'
                 #'<img src="data:image/jpeg;base64,{}">'
                 flag = server_fetch.response[i]['flags']['png']
                 ret = f'<b>Autochthonous Name:</b> '+ name + '<br>'\
                         +f'<b>Anglophone Name:</b> '+server_fetch.response[i]['name']['common']+ '<br>'+f'<img src="{flag}" style="width:80px;height:60px;">'+'<br>'\
-                            +str(f'<b>Administrative Center:</b> '+server_fetch.response[i]['capital'][0]) + '<br>'\
+                            +str(f'<b>Administrative Center:</b> '+ capital) + '<br>'\
                                 +str(f'<b>Subregion:</b> '+server_fetch.response[i]['subregion'])+ '<br>'\
                                     +  str( f'<b>Lingua Franca:</b> '+list(server_fetch.response[i]['languages'].items())[0][1])+ '<br>'\
                                         +lang + str(f'<b>Population:</b> '+ str(server_fetch.response[i]['population'])) + '<br>'\
@@ -155,5 +162,5 @@ class server_fetch:
 
 if __name__ == '__main__':
     y = server_fetch()
-    print(y.fetch('chn'))
+    print(y.raw_print('chn'))
     
