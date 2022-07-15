@@ -1,27 +1,21 @@
 import requests
 import time
 import json
-
-class color:
-   PURPLE = '\033[95m'
-   CYAN = '\033[96m'
-   DARKCYAN = '\033[36m'
-   BLUE = '\033[94m'
-   GREEN = '\033[92m'
-   YELLOW = '\033[93m'
-   RED = '\033[91m'
-   BOLD = '\033[1m'
-   UNDERLINE = '\033[4m'
-   END = '\033[0m'
-   
-
+import pandas as pd
+import io
+from bs4 import BeautifulSoup
 class server_fetch:
     fetch_time = 0
     response = ''
-
+    news= ''
+    hdi = ''
     def __init__(self):
         server_fetch.response = requests.get('https://restcountries.com/v3.1/all').json()
-        #server_fetch.response = json.loads(server_fetch.response.read())
+        server_fetch.news = requests.get('https://newsapi.org/v2/everything?domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
+        server_fetch.hdi=pd.read_csv(io.StringIO(requests.get(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,\
+            'html.parser').find_all(text='HDI and components time-series')[0].parent['href']).content.decode('utf-8')))
+        
+
 
     @staticmethod 
     def rettime():
@@ -69,17 +63,15 @@ class server_fetch:
 
 
     
-    def get_income(self,code):
-        try:
-            return requests.get(f'http://api.worldbank.org/v2/country/{code}?format=json').json()
-        except:
-            return 'N/A'
+    def get_news_if(self,code):
+        
+        return requests.get(f'https://newsapi.org/v2/everything?q={code}domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
 
     def form_str(self,code):
         #most  ofthe time is taken here
 
         start = time.time()
-        income = self.get_income(code)
+        #income = self.get_income(code)
         #response = requests.get(f'https://restcountries.com/v3.1/alpha/{code}').json()
         end = time.time()
         for i in range(250):
@@ -138,8 +130,37 @@ class server_fetch:
                 except(KeyError):
                     capital = 'N/A'
 
-
-
+                year = int(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,'html.parser').find_all(text='HDI and components time-series')[0].parent['href'][46:50]) - 1
+                
+                 
+                hdi_og = server_fetch.hdi[(server_fetch.hdi['iso3'] == f'{code}')]
+                #print(hdi[f'hdi_rank_{year}'][:][1])
+                if hdi_og.empty:
+                    hdi = 'N/A'
+                    ranked = 'N/A'
+                else:
+                    hdi = str(list(hdi_og[f'hdi_{year}'])[0])
+                    ranked = str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2]
+                #print(name)
+                if not hdi_og.empty:
+                    if float(hdi) >= .80:
+                        style = '<style>prh {color:#008000; display:inline;}</style> '
+                        color = '<prh>'
+                        color_end = '</prh>'
+                    elif float(hdi) >= .7 and float(hdi) < .80:
+                        style = '<style>prh {color:#FFA500; display:inline;}</style> '
+                        color = '<prh>'
+                        color_end = '</prh>'
+                    elif float(hdi) >= .5 and float(hdi) < .7:
+                        style = '<style>prh {color:#FF5349; display:inline;}</style> '
+                        color = '<prh>'
+                        color_end = '</prh>'
+                    elif float(hdi) < .5:
+                        style = '<style>prh {color:#FF0000; display:inline;}</style> '
+                        color = '<prh>'
+                        color_end = '</prh>'
+                    hdi = style + color + hdi + color_end
+                    ranked = style + color + ranked + color_end 
                 if len(lang) != 0: lang += '</br>'
                 #'<img src="data:image/jpeg;base64,{}">'
                 flag = server_fetch.response[i]['flags']['png']
@@ -150,7 +171,8 @@ class server_fetch:
                                     +  str( f'<b>Lingua Franca:</b> '+list(server_fetch.response[i]['languages'].items())[0][1])+ '<br>'\
                                         +lang + str(f'<b>Population:</b> '+ str(server_fetch.response[i]['population'])) + '<br>'\
                                                 +str(f'<b>Timezone (UTC):</b> ' + server_fetch.response[i]['timezones'][0]) + '<br>'+self.gini + '<br>'+self.money + '<br>'\
-                                                    +'<b>Income Level:</b> '+income +  '</div>'
+                                                    +f'<b>Human Development Inex ({year}):</b> '+hdi + '</br>'+\
+                                                        '<b>HDI rank: </b>'+ranked+'</div>'
                 
                 server_fetch.fetch_time += end-start
                 break

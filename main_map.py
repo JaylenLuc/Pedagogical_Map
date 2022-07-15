@@ -7,7 +7,8 @@ import json
 import api_mod as api
 import time
 from folium.plugins import MousePosition
-from alive_progress import alive_bar; import time
+import time
+import requests
 
 start1 = time.time()
 
@@ -138,7 +139,8 @@ class nation:
         #print(i['properties']['ISO_A3'])
         st = time.time()
         #print(i['properties']['ISO_A3'])
-        ht = country_object.form_str(i['properties']['ISO_A3'])
+        country_n = i['properties']['ISO_A3']
+        ht = country_object.form_str(country_n)
 
         en = time.time()
         
@@ -152,7 +154,9 @@ class nation:
             control = False,
             zoom_on_click = True,
             style_function=lambda x:bordersStyle)
-        popup = folium.Popup('Hi') #main thingy thing
+       
+
+        popup = folium.Popup('') #main thingy thing news api maybe maybe news api
         popup.add_to(geo)
         #name_n.add_child(geo)
         main_map.add_child(geo)
@@ -174,12 +178,16 @@ start2 = time.time()
 #make this a lot shorter and cleawner and less bopilerplate by making a dicitonary 
 #optimize style_func
 
+
+
+
 for i in country_r['features']:
     #sinosphere
     if i['properties']['ISO_A3'] in nation.Sinosphere : 
         
         y = time.time()
-        nation.style_func('#D12601','#D12601', i,"Sinosphere",sino)
+
+        nation.style_func('#D12601','#D12601', i,"Sinosphere",sino)#pass in admin instead
         x = time.time()
         func_time += x-y
     #indo-china
