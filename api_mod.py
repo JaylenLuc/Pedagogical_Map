@@ -132,35 +132,64 @@ class server_fetch:
 
                 year = int(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,'html.parser').find_all(text='HDI and components time-series')[0].parent['href'][46:50]) - 1
                 
+                #print(code)
                  
                 hdi_og = server_fetch.hdi[(server_fetch.hdi['iso3'] == f'{code}')]
                 #print(hdi[f'hdi_rank_{year}'][:][1])
                 if hdi_og.empty:
                     hdi = 'N/A'
                     ranked = 'N/A'
+                    gni = 'N/A'
+                    le = 'N/A'
+                    mys = 'N/A'
+                    eys = 'N/A'
                 else:
-                    hdi = str(list(hdi_og[f'hdi_{year}'])[0])
-                    ranked = str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2]
+                    hdi = [str(list(hdi_og[f'hdi_{year}'])[0]) if str(list(hdi_og[f'hdi_{year}'])[0]) != 'nan' else 'N/A'][0]
+                    ranked = [str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2] if str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2] != 'nan' else 'N/A'][0]
+                    gni = [str(list(hdi_og[f'gnipc_{year}'])[0]) if str(list(hdi_og[f'gnipc_{year}'])[0]) != 'nan' else 'N/A'][0]
+                    le = [str(list(hdi_og[f'le_{year}'])[0]) if str(list(hdi_og[f'le_{year}'])[0]) != 'nan' else 'N/A'][0]
+                    mys = [str(list(hdi_og[f'mys_{year}'])[0]) if str(list(hdi_og[f'mys_{year}'])[0]) != 'nan' else 'N/A'][0]
+                    eys = [str(list(hdi_og[f'eys_{year}'])[0]) if str(list(hdi_og[f'eys_{year}'])[0]) != 'nan' else 'N/A'][0]
                 #print(name)
-                if not hdi_og.empty:
-                    if float(hdi) >= .80:
-                        style = '<style>prh {color:#008000; display:inline;}</style> '
-                        color = '<prh>'
-                        color_end = '</prh>'
-                    elif float(hdi) >= .7 and float(hdi) < .80:
-                        style = '<style>prh {color:#FFA500; display:inline;}</style> '
-                        color = '<prh>'
-                        color_end = '</prh>'
-                    elif float(hdi) >= .5 and float(hdi) < .7:
-                        style = '<style>prh {color:#FF5349; display:inline;}</style> '
-                        color = '<prh>'
-                        color_end = '</prh>'
-                    elif float(hdi) < .5:
-                        style = '<style>prh {color:#FF0000; display:inline;}</style> '
-                        color = '<prh>'
-                        color_end = '</prh>'
+                if not hdi_og.empty and hdi != 'N/A':
+                    color = '<prh>'
+                    color_end = '</prh>'
+                    if float(hdi) >= .80: style = '<style>prh {color:#008000; display:inline;}</style> ' 
+                    elif float(hdi) >= .7 and float(hdi) < .80: style = '<style>prh {color:#FFA500; display:inline;}</style> '  
+                    elif float(hdi) >= .5 and float(hdi) < .7: style = '<style>prh {color:#FF5349; display:inline;}</style> '
+                    elif float(hdi) < .5: style = '<style>prh {color:#FF0000; display:inline;}</style> '
                     hdi = style + color + hdi + color_end
                     ranked = style + color + ranked + color_end 
+                if not hdi_og.empty and gni != 'N/A':
+                    color = '<prg>'
+                    color_end = '</prg>'
+                    if float(gni) >= 13500: style = '<style>prg {color:#008000; display:inline;}</style> '
+                    elif float(gni) >= 4500 and float(gni) < 13500: style = '<style>prg {color:#FFA500; display:inline;}</style> '
+                    elif float(gni) >= 1200 and float(gni) < 4500: style = '<style>prg {color:#FF5349; display:inline;}</style> '
+                    elif float(gni) < 1200: style = '<style>prg {color:#FF0000; display:inline;}</style> '
+                    gni =  style + color + str(gni) + color_end
+                if not hdi_og.empty and le != 'N/A':
+                    color = '<prl>'
+                    color_end = '</prl>'
+                    if float(le) >= 80: style = '<style>prl {color:#008000; display:inline;}</style> '
+                    elif float(le) >= 70 and float(le) < 80: style = '<style>prl {color:#FFA500; display:inline;}</style> '
+                    elif float(le) >= 60 and float(le) < 70: style = '<style>prl {color:#FF5349; display:inline;}</style> '
+                    elif float(le) < 60: style = '<style>prl {color:#FF0000; display:inline;}</style> '
+                    le = style + color + str(le) + color_end
+                if not hdi_og.empty and eys != 'N/A':
+                    color = '<prey>'
+                    color_end = '</prey>'
+                    if float(eys) >= 14: style = '<style>prey {color:#008000; display:inline;}</style> '      
+                    elif float(eys) >= 10 and float(eys) < 14: style = '<style>prey {color:#FFA500; display:inline;}</style> '
+                    elif float(eys) < 10:style = '<style>prey {color:#FF0000; display:inline;}</style> '
+                    eys = style + color + str(eys) + color_end
+                if not hdi_og.empty and mys != 'N/A':
+                    color = '<prm>'
+                    color_end = '</prm>'
+                    if float(mys) >= 12: style = '<style>prm {color:#008000; display:inline;}</style> '
+                    elif float(mys) >= 8 and float(mys) < 12: style = '<style>prm {color:#FFA500; display:inline;}</style> '  
+                    elif float(mys) < 8: style = '<style>prm {color:#FF0000; display:inline;}</style> '
+                    mys = style + color + str(mys) + color_end
                 if len(lang) != 0: lang += '</br>'
                 #'<img src="data:image/jpeg;base64,{}">'
                 flag = server_fetch.response[i]['flags']['png']
@@ -171,8 +200,10 @@ class server_fetch:
                                     +  str( f'<b>Lingua Franca:</b> '+list(server_fetch.response[i]['languages'].items())[0][1])+ '<br>'\
                                         +lang + str(f'<b>Population:</b> '+ str(server_fetch.response[i]['population'])) + '<br>'\
                                                 +str(f'<b>Timezone (UTC):</b> ' + server_fetch.response[i]['timezones'][0]) + '<br>'+self.gini + '<br>'+self.money + '<br>'\
-                                                    +f'<b>Human Development Inex ({year}):</b> '+hdi + '</br>'+\
-                                                        '<b>HDI rank: </b>'+ranked+'</div>'
+                                                    +f'<b>Human Development Index ({year}):</b> '+hdi + '</br>'+\
+                                                        '<b>HDI rank: </b>'+ranked+'<br>'+'<b>Gross National Income Per Capita (PPP):</b> '+ gni+'<br>'+\
+                                                            '<b>Life Expectancy at Birth:</b> '+ le+'<br>'+'<b>Expected Years of Schooling:</b> '+eys+'<br>'+\
+                                                                '<b>Mean Years of Schooling:</b> '+ mys +'</div>'
                 
                 server_fetch.fetch_time += end-start
                 break
