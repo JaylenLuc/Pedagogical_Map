@@ -48,7 +48,6 @@ maps = dict(Grey='https://server.arcgisonline.com/arcgis/rest/services/Canvas/Wo
 
 
 
-c_search = folium.FeatureGroup(name='Countries',show=False,overlay=False, control=False)
 
 
 #mcg = folium.plugins.MarkerCluster(control=False).add_to(main_map)
@@ -349,11 +348,8 @@ for map_name, url in maps.items():
 #adding cities to map
 caps = folium.FeatureGroup(name='Capitals',show=False)
 first = folium.FeatureGroup(name='First Level Admin Capital',show=False)
-prov = folium.FeatureGroup(name='Province',show=False)
-csvfile = pd.read_csv((r'worldcities.csv'))
 capitals = csvfile[(csvfile['capital'] == 'primary')]
 fir = csvfile[(csvfile['capital'] == 'admin')]
-lowe = csvfile[(csvfile['capital'] == 'minor')]
 #provinces = csvfile[(csvfile['capital'] == '')]
 #popu = csvfile['population']
 #icon = folium.features.CustomIcon('star.png',icon_size=(14, 14))
