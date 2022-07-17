@@ -53,37 +53,13 @@ maps = dict(Grey='https://server.arcgisonline.com/arcgis/rest/services/Canvas/Wo
 
 #mcg = folium.plugins.MarkerCluster(control=False).add_to(main_map)
 #main_map.add_child(mcg)
-search_cluster = folium.plugins.MarkerCluster().add_to(main_map)
+cap = folium.plugins.MarkerCluster(name='Capitals',show=False).add_to(main_map)
 # https://leafletjs.com/reference-1.7.1.html#path
 colors = ''
 fillColors = ''
 
-sino = folium.FeatureGroup(name='Sinosphere')
-indo = folium.FeatureGroup(name='Indo China')
-hindu = folium.FeatureGroup(name='Hindustan')
-ME = folium.FeatureGroup(name='Middle East')
-turkistan = folium.FeatureGroup(name='Turkistan')
-west = folium.FeatureGroup(name='The West')
-orth = folium.FeatureGroup(name='The Orthodoxy')
-cush = folium.FeatureGroup(name='Cushite')
-westafr = folium.FeatureGroup(name='West Africa')
-southafr = folium.FeatureGroup(name='South Africa')
-bantu = folium.FeatureGroup(name='Bantu')
-northafr = folium.FeatureGroup(name='North Africa')
-sud = folium.FeatureGroup(name='Sudan')
-cau = folium.FeatureGroup(name='Caucauses')
-mada = folium.FeatureGroup(name='Madagascar')
-mel = folium.FeatureGroup(name='Melanesia')
-micro = folium.FeatureGroup(name='Micronesia')
-poly = folium.FeatureGroup(name='Polynesia')
-him = folium.FeatureGroup(name='The Himilayas')
-euro_am = folium.FeatureGroup(name='Euro-North American Settler-Colonies')
-Mexica = folium.FeatureGroup(name='Spanish-occupied Mexica')
-Tupi = folium.FeatureGroup(name='Portuguese-Occupied Tupi-Guarani')
-Inca = folium.FeatureGroup(name='Spanish-Occupied Inca')
-Euro_Hispanic = folium.FeatureGroup(name='Euro-Hispanic Occupied South-West America ')
-Gran_colombia = folium.FeatureGroup(name='Gran_colombia')
-Caribbean = folium.FeatureGroup(name='Caribbean')
+sse = folium.FeatureGroup(name='Search Area')
+
 
 #class to fetch api information
 country_object = api.server_fetch()
@@ -146,7 +122,7 @@ class nation:
         #included in the tooltip popup::
          
         #print(i['properties']['ISO_A3'])
-
+        
 
         #print(i['geometry']['coordinates'])
 
@@ -374,7 +350,6 @@ for map_name, url in maps.items():
 #adding cities to map
 caps = folium.FeatureGroup(name='Capitals',show=False)
 first = folium.FeatureGroup(name='First Level Admin Capital',show=False)
-lower = folium.FeatureGroup(name='Lower Level Admin Capital',show=False)
 prov = folium.FeatureGroup(name='Province',show=False)
 csvfile = pd.read_csv((r'worldcities.csv'))
 capitals = csvfile[(csvfile['capital'] == 'primary')]
@@ -386,7 +361,7 @@ lowe = csvfile[(csvfile['capital'] == 'minor')]
 icon = "folium.Icon(color='red')" #High Population (>7,000,000)
 icon2 = "folium.Icon(color='orange')"#'Medium Population (between 2,000,000 and 7,000,000)
 icon3 = "folium.Icon(color='lightblue')"#Low Population (<2,000,000)
-
+#icon_seach = "folium.Icon(color='lightblue')"
 string1 = "first.add_child(folium.Marker("+\
         "location=[i['lat'], i['lng']],"+\
         "popup=folium.Popup(html=f'<style>pz {{color:{colors}; display:inline;}}</style>'+f'<b>First Level Admin Capital:</b> \
@@ -394,27 +369,17 @@ string1 = "first.add_child(folium.Marker("+\
         "max_width= 200),"+\
        " tooltip=f'<b>First subdivision Capital city:</b> {ci}',"
 
+
 string2 = "caps.add_child(folium.Marker("+\
         "location=[v['lat'], v['lng']],"+\
         "popup=folium.Popup(html=f'<style>pz {{color:{colors}; display:inline;}}</style>'+f'<b>Capital city of:</b> \
             {vc}<br><b>Population:</b><pz> {vpop}</pz><br><b>Coordinates:</b>{vlong}º E / {vlat}º N',"+\
         "max_width= 200),"+\
-       " tooltip=f'<b>Capital city:</b> {vci}',"
-string3 = "lower.add_child(folium.Marker("+\
-        "location=[ll['lat'], ll['lng']],"+\
-        "popup=folium.Popup(html=f'<style>pz {{color:{colors}; display:inline;}}</style>'+f'<b>Lower Level Admin Capital city of:</b> \
-            {lc}<br><b>Population:</b> <pz>{lpop}</pz><br><b>Coordinates:</b>{llong}º E / {llat}º N',"+\
-        "max_width= 200),"+\
-       " tooltip=f'<b>Lower subdivision Capital city:</b> {lci}',"
+       " tooltip=f'<b>Capital city:</b> {vci}',name=f'{vc}',"
 
-        
-for (vind, v), (iind, i), (lind, ll) in zip(capitals.iterrows(),fir.iterrows(), lowe.iterrows()):
+#main_map.add_child(exec(FeatureGroupSubGroup(caps,string_cap,control=False)))
+for (iind,i) in fir.iterrows():
     ci,c,pop,lat,long = i['city'],i['admin_name'],i['population'],i['lat'],i['lng']
-    vci,vc,vpop,vlat,vlong = v['city'],v['country'],v['population'],v['lat'],v['lng']
-    lci,lc,lpop,llat,llong = ll['city'],ll['country'],ll['population'],ll['lat'],ll['lng']
-    
-    
-    
     if float(pop) >= 7000000:
         colors = 'red'
         exec(string1 + f"icon= {icon}))")
@@ -425,30 +390,30 @@ for (vind, v), (iind, i), (lind, ll) in zip(capitals.iterrows(),fir.iterrows(), 
     elif float(pop) < 1000000:
         colors = 'lightblue'
         exec(string1 + f"icon= {icon3}))")
+
+        
+for (vind, v) in capitals.iterrows():
+    vci,vc,vpop,vlat,vlong = v['city'],v['country'],v['population'],v['lat'],v['lng']
+
     
     if float(vpop) >= 7000000:
         colors = 'red'
         exec(string2 + f"icon= {icon}))")
-
+        #thing = string_cap  + f"icon= {icon}))"
+        #exec(thing)
     elif float(vpop) < 7000000 and float(vpop) >= 1000000 :
         colors = 'orange'
         exec(string2 + f"icon= {icon2}))")
+        #thing = string_cap  + f"icon= {icon2}))"
+        #exec(thing)
 
     elif float(vpop) < 1000000:
         colors = 'lightblue'
         exec(string2 + f"icon= {icon3}))")
+        #thing = string_cap  + f"icon= {icon3}))"
+        #exec(thing)
 
-    if float(vpop) >= 7000000:
-        colors = 'red'
-        exec(string3 + f"icon= {icon}))")
-
-    elif float(vpop) < 7000000 and float(vpop) >= 1000000 :
-        colors = 'orange'
-        exec(string3 + f"icon= {icon2}))")
-
-    elif float(vpop) < 1000000:
-        colors = 'lightblue'
-        exec(string3 + f"icon= {icon3}))")
+    
 #for i,d in capitals.iterrows():
 
     
@@ -456,8 +421,7 @@ for (vind, v), (iind, i), (lind, ll) in zip(capitals.iterrows(),fir.iterrows(), 
 
 main_map.add_child(caps)
 main_map.add_child(first)
-main_map.add_child(lower)
-#main_map.add_child(prov)
+
 
 
 
@@ -468,18 +432,18 @@ folium.TileLayer('Stamen Water Color').add_to(main_map)
 folium.TileLayer('cartodbpositron').add_to(main_map)
 
 
-#geo_o = folium.GeoJson(search_geo).add_to(main_map)
-'''
+
+
 countryesearch = Search(
-    layer = geo_o,
-    geom_type = 'Polygon',
+    layer = caps,
+    geom_type = 'Point',
     search_label='name',
     placeholder='Search for a country',
     collapsed=False,
     search_zoom=7
     
 ).add_to(main_map)
-'''
+
 end1 = time.time()
 print(f'System runtime: {end1-start1} seconds')
 print(f'form_str func time: {func_time} seconds')
