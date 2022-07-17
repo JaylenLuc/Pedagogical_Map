@@ -48,12 +48,12 @@ maps = dict(Grey='https://server.arcgisonline.com/arcgis/rest/services/Canvas/Wo
 
 
 
-
+c_search = folium.FeatureGroup(name='Countries',show=False,overlay=False, control=False)
 
 
 #mcg = folium.plugins.MarkerCluster(control=False).add_to(main_map)
 #main_map.add_child(mcg)
-cap = folium.plugins.MarkerCluster(name='Capitals',show=False).add_to(main_map)
+#cap = folium.plugins.MarkerCluster(name='Capitals',show=False).add_to(main_map)
 # https://leafletjs.com/reference-1.7.1.html#path
 colors = ''
 fillColors = ''
@@ -148,8 +148,7 @@ class nation:
 
         popup = folium.Popup('') #main thingy thing news api maybe maybe news api
         popup.add_to(geo)
-        #name_n.add_child(geo)
-        #geo.add_to(search_cluster)
+        #c_search.add_child(geo)
         main_map.add_child(geo)
 
         #geo.add_to(main_map)
@@ -399,19 +398,14 @@ for (vind, v) in capitals.iterrows():
     if float(vpop) >= 7000000:
         colors = 'red'
         exec(string2 + f"icon= {icon}))")
-        #thing = string_cap  + f"icon= {icon}))"
-        #exec(thing)
+       
     elif float(vpop) < 7000000 and float(vpop) >= 1000000 :
         colors = 'orange'
         exec(string2 + f"icon= {icon2}))")
-        #thing = string_cap  + f"icon= {icon2}))"
-        #exec(thing)
 
     elif float(vpop) < 1000000:
         colors = 'lightblue'
         exec(string2 + f"icon= {icon3}))")
-        #thing = string_cap  + f"icon= {icon3}))"
-        #exec(thing)
 
     
 #for i,d in capitals.iterrows():
@@ -436,7 +430,7 @@ folium.TileLayer('cartodbpositron').add_to(main_map)
 
 countryesearch = Search(
     layer = caps,
-    geom_type = 'Point',
+    geom_type = 'Polygon',
     search_label='name',
     placeholder='Search for a country',
     collapsed=False,
