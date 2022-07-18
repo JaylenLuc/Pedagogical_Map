@@ -74,7 +74,7 @@ class nation:
     style_func_time = 0
     Sinosphere = ['MAC','HKG','CHN','PRK','KOR','JPN','TWN','SGP','VNM']
     Indo_China = ['LAO','THA','MMR','KHM','PHL','MYS','IDN','TLS']
-    Hindustan = ['IND','PAK','BGD','LKA']
+    Hindustan = ['IND','PAK','BGD','LKA','MDV']
     Middle_East = ['IRN','IRQ','SYR','SYR','ISR','PSE','LBN',\
         'SAU','YEM','OMN','ARE','QAT','BHR','KWT','AFG','JOR']
     Turkistan = ['TKM','UZB','KAZ','KGZ','TJK','MNG']
@@ -102,7 +102,7 @@ class nation:
     Mexica = ['MEX','BLZ','GTM','HND','SLV','NIC','CRI','PAN']
     Tupi =['GUY','SUR','BRA']
     Inca = ['ECU','PER','BOL','CHL']
-    SW_Am = ['ARG','URY','PRY','CHL']
+    SW_Am = ['ARG','URY','PRY','FLK']
     Gran_colombia = ['VEN','COL']
     Caribbean = ['CUB','DMA','HTI','TCA','DOM','BHS','JAM','PRI','ATG','MSR',\
         'KNA','VCT','TTO','BRB','GRD','LCA','CUW','ABW']
