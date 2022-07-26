@@ -1,16 +1,19 @@
 #interactive map
 #jaylen ho luc
-
+from turtle import width
+from zipfile import ZipFile
+from io import BytesIO
+from urllib.request import urlopen
 import folium
 import pandas as pd
-import json
 import api_mod as api
 import time
 from folium.plugins import MousePosition
 import time
 from folium.plugins import Search
 import requests
-
+import json
+import pycountry
 start1 = time.time()
 
 main_map = folium.Map(
@@ -57,61 +60,86 @@ maps = dict(Grey='https://server.arcgisonline.com/arcgis/rest/services/Canvas/Wo
 colors = ''
 fillColors = ''
 
-sse = folium.FeatureGroup(name='Search Area')
+cc = folium.FeatureGroup(name='General Country Data')
 
 
 #class to fetch api information
 country_object = api.server_fetch()
-#country_object.in_fetch()
-csvfile = pd.read_csv((r'worldcities.csv'))
-search_geo = {
-            "type": "FeatureCollection",
-            "features": []
-        }
+try:
+    csvfile = pd.read_csv('worldcities.csv')
+except:
+    resp = urlopen('https://simplemaps.com/static/data/world-cities/basic/simplemaps_worldcities_basicv1.75.zip')
+    zipfiles = ZipFile(BytesIO(resp.read()), 'r')
+    csvfile = pd.read_csv(zipfiles.open('worldcities.csv'))
+
+#for line in zipfiles.open(zipfile).readlines():
+#    print(line.decode('utf-8'))
+
+#for i in zipfile.open(file).readlines()
+#   unzipped.extractall(str(pathlib.Path(__file__).parent.resolve()))
+#filecsv = ''
+
+#for i in pathlib.Path(__file__).parent.resolve().iterdir():
+#    if i.name == 'worldcities.csv': 
+#        filecsv = i
+#        break
+#HARDED-------TESTABLE-------------------------------------------------------------------
+'''
+tt = country_object.news['articles'][100]['title']
+dd = country_object.news['articles'][99]['description']
+yy = country_object.news['articles'][99]['url']
+ll = country_object.news['articles'][99]['urlToImage']
+'''
+scroll = '<style> .tt_custom_sm{overflow-y: scroll !important;max-height: 100px} </style>  '
+#scroll = '<style> html{scrollbar-width:normal; scrollbar-color: #777 #555;} html::-webkit-scrollbar{width 10px;} </style>'
+#center = '<style> .center {text-align: center}</style>'
+
 
 class nation:
     classification = []
     style_func_time = 0
-    Sinosphere = ['MAC','HKG','CHN','PRK','KOR','JPN','TWN','SGP','VNM']
-    Indo_China = ['LAO','THA','MMR','KHM','PHL','MYS','IDN','TLS']
-    Hindustan = ['IND','PAK','BGD','LKA','MDV']
-    Middle_East = ['IRN','IRQ','SYR','SYR','ISR','PSE','LBN',\
-        'SAU','YEM','OMN','ARE','QAT','BHR','KWT','AFG','JOR']
-    Turkistan = ['TKM','UZB','KAZ','KGZ','TJK','MNG']
-    The_West = ['BMU','ALA','GIB','SMR','VAT','MLT','ESP','PRT','FRA','BEL','NLD','GBR','IRL',\
+    c_cat = [(['MAC','HKG','CHN','PRK','KOR','JPN','TWN','SGP','VNM'],['#D12601',"Sinosphere"]),
+    (['LAO','THA','MMR','KHM','PHL','MYS','IDN','TLS'],['#cc8899',"Indo China"]),
+    (['IND','PAK','BGD','LKA','MDV'],['#654321',"Hindustan"]),
+    (['IRN','IRQ','SYR','SYR','ISR','PSE','LBN',\
+        'SAU','YEM','OMN','ARE','QAT','BHR','KWT','AFG','JOR'],['#009000',"Middle East"]),
+    (['TKM','UZB','KAZ','KGZ','TJK','MNG'],['#09EBEE',"Turkistan"]),
+    (['BMU','ALA','GIB','SMR','VAT','MLT','ESP','PRT','FRA','BEL','NLD','GBR','IRL',\
         'DEU','LUX','ITA','AND','CHE','AUT','DNK','NOR','SWE','FIN','EST','FRO','ISL',\
-        'GRL','MCO','AUS','NZL']
-    The_Orthodoxy = ['POL','LTU','LVA','BLR','UKR','CZE','SVK','HUN'\
+        'GRL','MCO','AUS','NZL'],['blue','The West']),
+    (['POL','LTU','LVA','BLR','UKR','CZE','SVK','HUN'\
         'ROU','BGR','HRV','SVN','BIH','GRC','TUR','MKD','ALB','RUS','CYP',\
-        'SRB','MNE','MDA','ROU','HUN']
-    Cushite = ['ETH','ERI','SOM','DJI']
-    West_Africa = ['CPV','CIV','GHA','NGA','BEN','TGO','BFA','LBR','SLE','GIN','SEN',\
-        'GNB','MLI','NER','CMR','GNQ','GAB']
-    Bantoid = ['CAF','COD','COG','UGA','KEN','TZA','ZMB','AGO','MWI',\
-        'MOZ','ZWE','NAM','BWA','RWA','BDI']
-    South_Africa = ['ZAF','LSO']
-    North_Africa = ['LBY','DZA','MAR','MRT','ESH','DZA','TUN','EGY','TCD']
-    Sudan = ['SDN','SSD']
-    Caucauses = ['GEO','ARM','AZE']
-    Madagascar = ['COM','MDG','MUS']
-    Melanesia = ['PNG','SLB','VUT','NCL']
-    Micronesia = ['FSM','MHL','MNP','GUM','PLW','NRU','KIR']
-    Polynesia = ['PYF','WSM','TUV','WLF','NIU','TON','NFK','COK','PCN','FJI']
-    Himilayas = ['NPL','BTN']
-    Euro_North = ['USA','CAN']
-    Mexica = ['MEX','BLZ','GTM','HND','SLV','NIC','CRI','PAN']
-    Tupi =['GUY','SUR','BRA']
-    Inca = ['ECU','PER','BOL','CHL']
-    SW_Am = ['ARG','URY','PRY','FLK']
-    Gran_colombia = ['VEN','COL']
-    Caribbean = ['CUB','DMA','HTI','TCA','DOM','BHS','JAM','PRI','ATG','MSR',\
-        'KNA','VCT','TTO','BRB','GRD','LCA','CUW','ABW']
+        'SRB','MNE','MDA','ROU','HUN'],['purple','The Orthodoxy']),
+    (['ETH','ERI','SOM','DJI'],['#376550','Cushite']),
+    (['CPV','CIV','GHA','NGA','BEN','TGO','BFA','LBR','SLE','GIN','SEN',\
+        'GNB','MLI','NER','CMR','GNQ','GAB'],['#ff8c00','West Africa']),
+    (['CAF','COD','COG','UGA','KEN','TZA','ZMB','AGO','MWI',\
+        'MOZ','ZWE','NAM','BWA','RWA','BDI'],['#FBC490','Bantu']),
+    (['ZAF','LSO'],['black','South Africa']),
+    (['LBY','DZA','MAR','MRT','ESH','DZA','TUN','EGY','TCD'],['#00c300','North Africa']),
+    (['SDN','SSD'],['#FFCC00','Sudan']),
+    (['GEO','ARM','AZE'],['#75816b','Caucauses']),
+    (['COM','MDG','MUS'],['#800020','Madagascar']),
+    (['PNG','SLB','VUT','NCL'],['#8da825','Melanesia']),
+     (['FSM','MHL','MNP','GUM','PLW','NRU','KIR'],['#00008B','Micronesia']),
+    (['PYF','WSM','TUV','WLF','NIU','TON','NFK','COK','PCN','FJI','ASM'],['#39FF14','Polynesia']),
+    (['NPL','BTN'],['#ACD5F3','The Himilayas']),
+     (['USA','CAN'],['#000080','Euro-North American Settler-Colonies']),
+    (['MEX','BLZ','GTM','HND','SLV','NIC','CRI','PAN'],['#125454','Spanish-occupied Mexica']),
+    (['GUY','SUR','BRA'],['#F36196','Portuguese-Occupied Tupi-Guarani']),
+    (['ECU','PER','BOL','CHL'],['#C19A6B ','Spanish-Occupied Inca']),
+   (['ARG','URY','PRY','FLK'],['#0d98ba ','Euro-Hispanic Occupied South-West America ']),
+    (['VEN','COL'],['#C49102 ','Grand colombia']),
+    (['CUB','DMA','HTI','TCA','DOM','BHS','JAM','PRI','ATG','MSR',\
+        'KNA','VCT','TTO','BRB','GRD','LCA','CUW','ABW','AIA'],['#00A36C ','Caribbean'])]
+    
+    c_dict = {i : v  for (li,v) in c_cat for i in li}
 
 
     @staticmethod
-    def style_func(colorsz,fillColorsz,i,namez,name_n):
+    def style_func(colorsz,i,namez):
         colors = colorsz
-        fillColors = fillColorsz
+        fillColors = colorsz
         bordersStyle={
             'color': f'{colors}',
             'weight':2,
@@ -127,7 +155,7 @@ class nation:
 
         st = time.time()
         #print(i['properties']['ISO_A3'])
-       
+        
         ht = country_object.form_str(i['properties']['ISO_A3'])
 
         en = time.time()
@@ -141,14 +169,46 @@ class nation:
             show = True,
             control = False,
             zoom_on_click = True,
-            name = name_n,
+            name = i['properties']['ADMIN'],
             style_function=lambda x:bordersStyle)
-       
+        all_news = f'{scroll}<h1 class="center";font-size:25px;>Current Events</h1><br>'
+        ticker = 0
+        iso3 = i['properties']['ISO_A3']
+        '''
+        print(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower())
+        country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower()) 
+        print(api.server_fetch.news)#try lower case if not working
+        tot = api.server_fetch.news['totalResults']
+        print('_---------------',int( api.server_fetch.news['totalResults']))
 
-        popup = folium.Popup('') #main thingy thing news api maybe maybe news api
+        for idx in range(0,tot) :
+            if  ticker < 3:
+    
+                tt,dd,yy,ll = api.server_fetch.news['articles'][idx]['title'],\
+                api.server_fetch.news['articles'][idx]['description'],api.server_fetch.news['articles'][idx]['url'],\
+                api.server_fetch.news['articles'][idx]['urlToImage']
+                print('1111')
+                
+                all_news += f'<img src="{ll}" style="width:130px;height:100px;"><br><b>\
+                <h2 style="font-size:20px;">{tt}</h2></b>{dd}<br><a href="{yy}">Article Link</a><br>'
+                ticker +=1
+
+            
+                #print('in loop')
+                #print(i['properties']['ADMIN'])
+                #print(idx)
+                #print(ticker)
+            #print('OUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
+            #print(ticker)
+            #print(i['properties']['ADMIN'])
+            #print(idx)
+        print(f'survived for {iso3}')
+        '''
+        #all_news += ''
+        popup = folium.Popup(all_news, max_width=400 ) #main thingy thing news api maybe maybe news api
         popup.add_to(geo)
-        #c_search.add_child(geo)
-        main_map.add_child(geo)
+        cc.add_child(geo)
+        #main_map.add_child(geo)
 
         #geo.add_to(main_map)
 
@@ -156,8 +216,13 @@ class nation:
         #nation.classification.append(new_country)
 #web scrap the gepjson file
 ugh = time.time()
-with open(r'countries.geojson') as open_f: #replace file path of the countries geojson file
-    country_r = json.loads(open_f.read())
+
+
+try:
+    with open(r'countries.geojson') as open_f: country_r = json.loads(open_f.read())
+except:
+    country_r = requests.get('https://datahub.io/core/geo-countries/r/countries.geojson').json()
+
 ughe = time.time()
 print(f'open file: {ughe-ugh}')
 func_time = 0
@@ -169,167 +234,12 @@ start2 = time.time()
 #optimize style_func
 
 
+#reduce boilerplate #ALL DONE REDUCED LINES 
 
+for i in country_r['features']: 
+    try: nation.style_func(nation.c_dict[i['properties']['ISO_A3']][0],i, nation.c_dict[i['properties']['ISO_A3']][1])
+    except(KeyError): continue
 
-for i in country_r['features']:
-    #sinosphere
-    if i['properties']['ISO_A3'] in nation.Sinosphere : 
-        
-        y = time.time()
-
-        nation.style_func('#D12601','#D12601', i,"Sinosphere",i['properties']['ADMIN'])#pass in admin instead
-        x = time.time()
-        func_time += x-y
-    #indo-china
-    elif i['properties']['ISO_A3'] in nation.Indo_China: 
-        y = time.time()
-        nation.style_func('#cc8899','#cc8899', i,"Indo China",i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Hindustan
-    elif i['properties']['ISO_A3'] in nation.Hindustan: 
-        y = time.time()
-        nation.style_func('#654321','#654321', i,"Hindustan",i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Middle East
-    elif i['properties']['ISO_A3'] in nation.Middle_East:
-        y = time.time()
-        nation.style_func('#009000','#009000', i,"Middle East",i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Turkistan
-    elif i['properties']['ISO_A3'] in nation.Turkistan: 
-        y = time.time()
-        nation.style_func('#09EBEE','#09EBEE', i,"Turkistan",i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #The West
-    elif i['properties']['ISO_A3'] in nation.The_West: 
-        y = time.time()
-        nation.style_func('blue','blue', i,'The West',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #The Orthodoxy
-    elif i['properties']['ISO_A3'] in nation.The_Orthodoxy: 
-        y = time.time()
-        nation.style_func('purple','purple', i,'The Orthodoxy',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Cushite
-    elif  i['properties']['ISO_A3'] in nation.Cushite: 
-        y = time.time()
-        nation.style_func('#376550','#376550', i,'Cushite',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #West Africa
-    elif i['properties']['ISO_A3'] in nation.West_Africa: 
-        y = time.time()
-        nation.style_func('#ff8c00','#ff8c00', i,'West Africa',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Bantoid
-    elif i['properties']['ISO_A3'] in nation.Bantoid:
-        y = time.time()
-        nation. style_func('#FBC490','#FBC490', i,'Bantu',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #South Africa
-    elif i['properties']['ISO_A3'] in nation.South_Africa: 
-        y = time.time()
-        nation.style_func('black','black', i,'South Africa',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #North Africa
-    elif i['properties']['ISO_A3'] in nation.North_Africa: 
-        y = time.time()
-        nation.style_func('#00c300','#00c300', i,'North Africa',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Sudan
-    elif i['properties']['ISO_A3'] in nation.Sudan: 
-        y = time.time()
-        nation.style_func('#FFCC00','#FFCC00', i,'Sudan',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #caucauses
-    elif i['properties']['ISO_A3'] in nation.Caucauses:
-        y = time.time()
-        nation.style_func('#75816b','#75816b', i,'Caucauses',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #madagascar
-    elif i['properties']['ISO_A3'] in nation.Madagascar: 
-        y = time.time()
-        nation.style_func('#800020','#800020', i,'Madagascar',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #melanesia
-    elif i['properties']['ISO_A3'] in nation.Melanesia: 
-        y = time.time()
-        nation.style_func('#8da825','#8da825', i,'Melanesia',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Micronesia
-    elif i['properties']['ISO_A3'] in nation.Micronesia: 
-        y = time.time()
-        nation.style_func('#00008B','#00008B', i,'Micronesia',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Polynesia
-    elif i['properties']['ISO_A3'] in nation.Polynesia:
-        y = time.time() 
-        nation.style_func('#39FF14','#39FF14', i,'Polynesia',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Himilayas
-    elif i['properties']['ISO_A3'] in nation.Himilayas: 
-        y = time.time()
-        nation.style_func('#ACD5F3','#ACD5F3', i,'The Himilayas',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Euro-North American Settler-Colonies
-    elif i['properties']['ISO_A3'] in nation.Euro_North: 
-        y = time.time()
-        nation.style_func('#000080','#000080', i,'Euro-North American Settler-Colonies',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Mexican-occupied Mexica
-    elif i['properties']['ISO_A3'] in nation.Mexica: 
-        y = time.time()
-        nation.style_func('#125454','#125454', i,'Spanish-occupied Mexica',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Portuguese-Occupied Tupi-Guarani
-    elif i['properties']['ISO_A3'] in nation.Tupi: 
-        y = time.time()
-        nation.style_func('#F36196','#F36196', i,'Portuguese-Occupied Tupi-Guarani',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Spanish-Occupied Inca
-    elif i['properties']['ISO_A3'] in nation.Inca: 
-        y = time.time()
-        nation.style_func('#C19A6B ','#C19A6B ', i,'Spanish-Occupied Inca',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Euro-Hispanic Occupied South-West America 
-    elif i['properties']['ISO_A3'] in nation.SW_Am: 
-        y = time.time()
-        nation.style_func('#0d98ba ','#0d98ba ', i,'Euro-Hispanic Occupied South-West America ',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Gran_colombia
-    elif i['properties']['ISO_A3'] in nation.Gran_colombia: 
-        y = time.time()
-        nation.style_func('#C49102 ','#C49102 ', i,'Grand colombia',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
-    #Caribbean
-    elif i['properties']['ISO_A3'] in nation.Caribbean: 
-        y = time.time()
-        nation.style_func('#00A36C ','#00A36C ', i,'Caribbean',i['properties']['ADMIN'])
-        x = time.time()
-        func_time += x-y
 #findings: style func is quite fast but the for loop itself may be overbearing
 end2 = time.time()
 print(f'function fetch runtime: {func_time}')
@@ -408,10 +318,9 @@ for (vind, v) in capitals.iterrows():
 
     
 
-
+main_map.add_child(cc)
 main_map.add_child(caps)
 main_map.add_child(first)
-
 
 
 
@@ -439,7 +348,7 @@ print(f'System runtime: {end1-start1} seconds')
 print(f'form_str func time: {func_time} seconds')
 print(f'API fetching {country_object.fetch_time}')
 folium.LayerControl().add_to(main_map)
-main_map.save('output.html')
+main_map.save('output1.html')
 #folium.GeoJson()
 
 #folium.Marker(

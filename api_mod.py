@@ -4,6 +4,9 @@ import json
 import pandas as pd
 import io
 from bs4 import BeautifulSoup
+from newsapi import NewsApiClient
+newsapi = NewsApiClient(api_key='9d00f1ed20454836b2b1b30b5f84530a')
+
 class server_fetch:
     fetch_time = 0
     response = ''
@@ -11,12 +14,28 @@ class server_fetch:
     hdi = ''
     def __init__(self):
         server_fetch.response = requests.get('https://restcountries.com/v3.1/all').json()
-        server_fetch.news = requests.get('https://newsapi.org/v2/everything?domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
+        #server_fetch.news = requests.get('https://newsapi.org/v2/everything?domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
         server_fetch.hdi=pd.read_csv(io.StringIO(requests.get(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,\
             'html.parser').find_all(text='HDI and components time-series')[0].parent['href']).content.decode('utf-8')))
-        
 
-
+    def get_news(self,iso2):
+        server_fetch.news = requests.get(f'https://newsapi.org/v2/top-headlines?country={iso2}&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
+        #print(iso2)
+        #print(type(iso2))
+        #server_fetch.news = newsapi.get_top_headlines(language= 'en',country=iso2)
+    def find_news(self):
+        #server_fetch.news = requests.get('https://newsapi.org/v2/everything?domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
+        pass
+        '''
+        self.author = server_fetch.news['articles'][1]['author']
+        self.title =server_fetch.news['articles'][1]['title']
+        self.descr =server_fetch.news['articles'][1]['description']
+        self.url =server_fetch.news['articles'][1]['url']
+        self.img =server_fetch.news['articles'][1]['urlToImage']
+        self.pub =server_fetch.news['articles'][1]['publishedAt']
+        self.content = server_fetch.news['articles'][1]['content'][0:-14]
+        pass
+        '''
     @staticmethod 
     def rettime():
         return server_fetch.server_fetch.rettime
@@ -150,6 +169,8 @@ class server_fetch:
                     le = [str(list(hdi_og[f'le_{year}'])[0]) if str(list(hdi_og[f'le_{year}'])[0]) != 'nan' else 'N/A'][0]
                     mys = [str(list(hdi_og[f'mys_{year}'])[0]) if str(list(hdi_og[f'mys_{year}'])[0]) != 'nan' else 'N/A'][0]
                     eys = [str(list(hdi_og[f'eys_{year}'])[0]) if str(list(hdi_og[f'eys_{year}'])[0]) != 'nan' else 'N/A'][0]
+                    try: gni = float(gni)
+                    except: pass
                 #print(name)
                 if not hdi_og.empty and hdi != 'N/A':
                     color = '<prh>'
@@ -167,7 +188,7 @@ class server_fetch:
                     elif float(gni) >= 4500 and float(gni) < 13500: style = '<style>prg {color:#FFA500; display:inline;}</style> '
                     elif float(gni) >= 1200 and float(gni) < 4500: style = '<style>prg {color:#FF5349; display:inline;}</style> '
                     elif float(gni) < 1200: style = '<style>prg {color:#FF0000; display:inline;}</style> '
-                    gni =  style + color + str(gni) + color_end
+                    gni =  style + color + f'{gni:,}' + color_end
                 if not hdi_og.empty and le != 'N/A':
                     color = '<prl>'
                     color_end = '</prl>'
@@ -192,16 +213,21 @@ class server_fetch:
                     mys = style + color + str(mys) + color_end
                 if len(lang) != 0: lang += '</br>'
                 #'<img src="data:image/jpeg;base64,{}">'
+                #print(code)
+                
+                pop = server_fetch.response[i]['population']
+
+                #print(pop)
                 flag = server_fetch.response[i]['flags']['png']
                 ret = f'<b>Autochthonous Name:</b> '+ name + '<br>'\
-                        +f'<b>Anglophone Name:</b> '+server_fetch.response[i]['name']['common']+ '<br>'+f'<img src="{flag}" style="width:80px;height:60px;">'+'<br>'\
+                        +f'<b>Anglophone Name:</b> '+server_fetch.response[i]['name']['common']+ '<br>'+f'<img src="{flag}" style="width:114px;height:60px;">'+'<br>'\
                             +str(f'<b>Administrative Center:</b> '+ capital) + '<br>'\
                                 +str(f'<b>Subregion:</b> '+server_fetch.response[i]['subregion'])+ '<br>'\
                                     +  str( f'<b>Lingua Franca:</b> '+list(server_fetch.response[i]['languages'].items())[0][1])+ '<br>'\
-                                        +lang + str(f'<b>Population:</b> '+ str(server_fetch.response[i]['population'])) + '<br>'\
+                                        +lang + '<b>Population:</b> '+f'{pop:,}' + '<br>'\
                                                 +str(f'<b>Timezone (UTC):</b> ' + server_fetch.response[i]['timezones'][0]) + '<br>'+self.gini + '<br>'+self.money + '<br>'\
                                                     +f'<b>Human Development Index ({year}):</b> '+hdi + '</br>'+\
-                                                        '<b>HDI rank: </b>'+ranked+'<br>'+'<b>Gross National Income Per Capita (PPP):</b> '+ gni+'<br>'+\
+                                                        '<b>HDI rank: </b>'+ranked+'<br>'+f'<b>Gross National Income Per Capita (PPP):</b> {gni}'+'<br>'+\
                                                             '<b>Life Expectancy at Birth:</b> '+ le+'<br>'+'<b>Expected Years of Schooling:</b> '+eys+'<br>'+\
                                                                 '<b>Mean Years of Schooling:</b> '+ mys +'</div>'
                 
