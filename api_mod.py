@@ -5,6 +5,9 @@ import pandas as pd
 import io
 from bs4 import BeautifulSoup
 from newsapi import NewsApiClient
+import http.client, urllib.parse
+
+
 newsapi = NewsApiClient(api_key='9d00f1ed20454836b2b1b30b5f84530a')
 
 class server_fetch:
@@ -19,10 +22,22 @@ class server_fetch:
             'html.parser').find_all(text='HDI and components time-series')[0].parent['href']).content.decode('utf-8')))
 
     def get_news(self,iso2):
-        server_fetch.news = requests.get(f'https://newsapi.org/v2/top-headlines?country={iso2}&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
-        #print(iso2)
-        #print(type(iso2))
-        #server_fetch.news = newsapi.get_top_headlines(language= 'en',country=iso2)
+
+        conn = http.client.HTTPConnection('api.mediastack.com')
+
+        params = urllib.parse.urlencode({
+            'access_key': 'ACCESS_KEY',
+            'categories': '-entertainment ,-health,-sports',
+            'sort': 'published_desc',
+            'limit': 5,
+            'countries': str(iso2),
+            })
+
+        conn.request('GET', f'/v1/news?{params}')
+        return conn.getresponse().read().decode('utf-8')
+
+
+
     def find_news(self):
         #server_fetch.news = requests.get('https://newsapi.org/v2/everything?domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
         pass

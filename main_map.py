@@ -13,6 +13,7 @@ import time
 from folium.plugins import Search
 import requests
 import json
+import branca
 import pycountry
 start1 = time.time()
 
@@ -84,13 +85,13 @@ except:
 #        filecsv = i
 #        break
 #HARDED-------TESTABLE-------------------------------------------------------------------
-'''
-tt = country_object.news['articles'][100]['title']
-dd = country_object.news['articles'][99]['description']
-yy = country_object.news['articles'][99]['url']
-ll = country_object.news['articles'][99]['urlToImage']
-'''
-scroll = '<style> .tt_custom_sm{overflow-y: scroll !important;max-height: 100px} </style>  '
+# '''
+# tt = country_object.news['articles'][100]['title']
+# dd = country_object.news['articles'][99]['description']
+# yy = country_object.news['articles'][99]['url']
+# ll = country_object.news['articles'][99]['urlToImage']
+# '''
+# scroll = '<style> .tt_custom_sm{overflow-y: scroll !important;max-height: 100px} </style>  '
 #scroll = '<style> html{scrollbar-width:normal; scrollbar-color: #777 #555;} html::-webkit-scrollbar{width 10px;} </style>'
 #center = '<style> .center {text-align: center}</style>'
 
@@ -171,41 +172,77 @@ class nation:
             zoom_on_click = True,
             name = i['properties']['ADMIN'],
             style_function=lambda x:bordersStyle)
-        all_news = f'{scroll}<h1 class="center";font-size:25px;>Current Events</h1><br>'
+        all_news = f'<h1 font-size:25px;>Current Events</h1><br><base target="_blank" >' #still need to test without scroll
         ticker = 0
         iso3 = i['properties']['ISO_A3']
+        response_object  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower()) 
+        #TESTER__________________________________________________________
+        # temp = '<br><a href="https://www.brookings.edu/">Article Link</a>'
+        # all_news += temp
+        #<base target= '_blank'/> works forthte time being
+        
+        #media stack response object incldues the pagination and data object
+        
+        #------------------------------------------------------------------------------------------------------------------------------------------------
+            #         {
+            #     "pagination": {
+            #         "limit": 100,
+            #         "offset": 0,
+            #         "count": 100,
+            #         "total": 293
+            #     },
+            #     "data": [
+            #         {
+            #             "author": "CNN Staff",
+            #             "title": "This may be the big winner of the market crash",
+            #             "description": "This may be the big winner of the market crash",
+            #             "url": "http://rss.cnn.com/~r/rss/cnn_topstories/~3/KwE80_jkKo8/a-sa-dd-3",
+            #             "source": "CNN",
+            #             "image": "https://cdn.cnn.com/cnnnext/dam/assets/150325082152-social-gfx-cnn-logo-super-169.jpg",
+            #             "category": "general",
+            #             "language": "en",
+            #             "country": "us",
+            #             "published_at": "2020-07-17T23:35:06+00:00"
+            #         },
+            #         [...]
+            #     ]
+            # }
+
         '''
-        print(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower())
-        country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower()) 
-        print(api.server_fetch.news)#try lower case if not working
-        tot = api.server_fetch.news['totalResults']
-        print('_---------------',int( api.server_fetch.news['totalResults']))
+        try:
+            print(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower())
+            #country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower()) 
+            print(api.server_fetch.news)#try lower case if not working
+            tot = api.server_fetch.news['totalResults']
+            print('_---------------',int( api.server_fetch.news['totalResults']))
 
-        for idx in range(0,tot) :
-            if  ticker < 3:
-    
-                tt,dd,yy,ll = api.server_fetch.news['articles'][idx]['title'],\
-                api.server_fetch.news['articles'][idx]['description'],api.server_fetch.news['articles'][idx]['url'],\
-                api.server_fetch.news['articles'][idx]['urlToImage']
-                print('1111')
+            for idx in range(0,tot) :
+                if  ticker < 3:
+
+                    tt,dd,yy,ll = api.server_fetch.news['articles'][idx]['title'],\
+                    api.server_fetch.news['articles'][idx]['description'],api.server_fetch.news['articles'][idx]['url'],\
+                    api.server_fetch.news['articles'][idx]['urlToImage']
+                    print('1111')
+                    
+                    all_news += f'<img src="{imageurl}" style="width:130px;height:100px;"><br><b>\
+                    <h2 style="font-size:20px;">{title}</h2></b>{descrip}<br><a href="{urllink}">Article Link</a><br>'
+                    ticker +=1
+
                 
-                all_news += f'<img src="{ll}" style="width:130px;height:100px;"><br><b>\
-                <h2 style="font-size:20px;">{tt}</h2></b>{dd}<br><a href="{yy}">Article Link</a><br>'
-                ticker +=1
-
-            
-                #print('in loop')
+                    #print('in loop')
+                    #print(i['properties']['ADMIN'])
+                    #print(idx)
+                    #print(ticker)
+                #print('OUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
+                #print(ticker)
                 #print(i['properties']['ADMIN'])
                 #print(idx)
-                #print(ticker)
-            #print('OUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
-            #print(ticker)
-            #print(i['properties']['ADMIN'])
-            #print(idx)
-        print(f'survived for {iso3}')
+        except: pass
         '''
+        #print(f'survived for {iso3}')
         #all_news += ''
-        popup = folium.Popup(all_news, max_width=400 ) #main thingy thing news api maybe maybe news api
+        popup = folium.Popup(branca.element.IFrame(html=all_news ,\
+            width=500, height=400), max_width=500 ) #main thingy thing news api maybe maybe news api
         popup.add_to(geo)
         cc.add_child(geo)
         #main_map.add_child(geo)
