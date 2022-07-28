@@ -21,20 +21,22 @@ class server_fetch:
         server_fetch.hdi=pd.read_csv(io.StringIO(requests.get(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,\
             'html.parser').find_all(text='HDI and components time-series')[0].parent['href']).content.decode('utf-8')))
 
-    def get_news(self,iso2):
+    def get_news(self,iso2,apikey):
 
         conn = http.client.HTTPConnection('api.mediastack.com')
 
         params = urllib.parse.urlencode({
-            'access_key': 'ACCESS_KEY',
-            'categories': '-entertainment ,-health,-sports',
+            'access_key': f'{apikey}', #REPLACE
+            'categories': 'general,-entertainment ,-health,-sports, -business',
             'sort': 'published_desc',
+            'languages': 'en',
             'limit': 5,
             'countries': str(iso2),
             })
 
         conn.request('GET', f'/v1/news?{params}')
-        return conn.getresponse().read().decode('utf-8')
+
+        return json.loads(conn.getresponse().read().decode('utf-8'))
 
 
 

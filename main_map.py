@@ -173,9 +173,9 @@ class nation:
             name = i['properties']['ADMIN'],
             style_function=lambda x:bordersStyle)
         all_news = f'<h1 font-size:25px;>Current Events</h1><br><base target="_blank" >' #still need to test without scroll
-        ticker = 0
         iso3 = i['properties']['ISO_A3']
-        response_object  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower()) 
+        response_object  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower(),'53dd1a1eb44bcc6047ba7d1a87d05a63') 
+        print(response_object)
         #TESTER__________________________________________________________
         # temp = '<br><a href="https://www.brookings.edu/">Article Link</a>'
         # all_news += temp
@@ -207,26 +207,22 @@ class nation:
             #         [...]
             #     ]
             # }
+            #---------------------------------------------------------------------------------------------------------------------------------------------------
 
-        '''
-        try:
-            print(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower())
+        
+            #print(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower())
             #country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower()) 
-            print(api.server_fetch.news)#try lower case if not working
-            tot = api.server_fetch.news['totalResults']
-            print('_---------------',int( api.server_fetch.news['totalResults']))
-
-            for idx in range(0,tot) :
-                if  ticker < 3:
-
-                    tt,dd,yy,ll = api.server_fetch.news['articles'][idx]['title'],\
-                    api.server_fetch.news['articles'][idx]['description'],api.server_fetch.news['articles'][idx]['url'],\
-                    api.server_fetch.news['articles'][idx]['urlToImage']
-                    print('1111')
-                    
-                    all_news += f'<img src="{imageurl}" style="width:130px;height:100px;"><br><b>\
-                    <h2 style="font-size:20px;">{title}</h2></b>{descrip}<br><a href="{urllink}">Article Link</a><br>'
-                    ticker +=1
+            #print(api.server_fetch.news)#try lower case if not working
+            #tot = api.server_fetch.news['totalResults']
+            #print('_---------------',int( api.server_fetch.news['totalResults']))
+        try:
+            for i in response_object['data']: 
+                imageurl, title, descrip, urllink = i['image'],  i['title'],\
+                i['description'], i['url']
+                all_news += f'<img src="{imageurl}" style="width:130px;height:100px;"><br><b>\
+                <h2 style="font-size:20px;">{title}</h2></b>{descrip}<br><a href="{urllink}">Article Link</a><br>'
+        except: print('error')
+            
 
                 
                     #print('in loop')
@@ -237,8 +233,9 @@ class nation:
                 #print(ticker)
                 #print(i['properties']['ADMIN'])
                 #print(idx)
-        except: pass
-        '''
+        
+        
+
         #print(f'survived for {iso3}')
         #all_news += ''
         popup = folium.Popup(branca.element.IFrame(html=all_news ,\
