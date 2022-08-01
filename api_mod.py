@@ -1,3 +1,4 @@
+from urllib import response
 import requests
 import time
 import json
@@ -8,101 +9,104 @@ from newsapi import NewsApiClient
 import http.client, urllib.parse
 
 
+
 newsapi = NewsApiClient(api_key='9d00f1ed20454836b2b1b30b5f84530a')
 
 class server_fetch:
     fetch_time = 0
     response = ''
-    news= ''
+    news= '' #NOT USED UNLESS CACHE
     hdi = ''
+#------------------------------------------------------------------------------------------------------------------------------------------------------
     def __init__(self):
         server_fetch.response = requests.get('https://restcountries.com/v3.1/all').json()
         #server_fetch.news = requests.get('https://newsapi.org/v2/everything?domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
         server_fetch.hdi=pd.read_csv(io.StringIO(requests.get(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,\
             'html.parser').find_all(text='HDI and components time-series')[0].parent['href']).content.decode('utf-8')))
+#------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    def get_news(self,iso2,apikey):
+    def get_news(self,coun,apikey):
+        #media stack 500 per month
+        #-------------------------------------------------------------------------
+        # conn = http.client.HTTPConnection('api.mediastack.com')
 
-        conn = http.client.HTTPConnection('api.mediastack.com')
+        # params = urllib.parse.urlencode({
+        #     'access_key': f'{apikey}', #REPLACE
+        #     'categories': 'general,-entertainment ,-health,-sports, -business',
+        #     'sort': 'published_desc',
+        #     'sources':'cfr', #new
+        #     'languages': 'en',
+        #     'limit': 5,
+        #     'countries': str(iso2),
+        #     })
 
-        params = urllib.parse.urlencode({
-            'access_key': f'{apikey}', #REPLACE
-            'categories': 'general,-entertainment ,-health,-sports, -business',
-            'sort': 'published_desc',
-            'languages': 'en',
-            'limit': 5,
-            'countries': str(iso2),
-            })
+        # conn.request('GET', f'/v1/news?{params}')
 
-        conn.request('GET', f'/v1/news?{params}')
+        # response_object = json.loads(conn.getresponse().read().decode('utf-8'))
+        #VARIANT1--------------------------------------------------------------------------------------------------------------------------------------------------
+        #f'https://newsapi.org/v2/everything?q=+{coun}&language=en&domains=cfr.org,brookings.edu,crisisgroup.org,csis.org&apiKey={apikey}'
+        #at this point, play around with news api domain param and q param for more accurate and salient results*****************************
+        #another thing is perhaps add a couple more things to the hover pop up such as biggest export and import , largest mineral deposits, geography, and breif description, and demographics and gov type
+        response_object = requests.get(f'https://newsapi.org/v2/everything?q={coun}&language=en&domains=cfr.org,brookings.edu,aljazeera.com,crisisgroup.org,csis.org&apiKey={apikey}').json()
+        print(response_object)
 
-        return json.loads(conn.getresponse().read().decode('utf-8'))
-
-
-
-    def find_news(self):
-        #server_fetch.news = requests.get('https://newsapi.org/v2/everything?domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
-        pass
-        '''
-        self.author = server_fetch.news['articles'][1]['author']
-        self.title =server_fetch.news['articles'][1]['title']
-        self.descr =server_fetch.news['articles'][1]['description']
-        self.url =server_fetch.news['articles'][1]['url']
-        self.img =server_fetch.news['articles'][1]['urlToImage']
-        self.pub =server_fetch.news['articles'][1]['publishedAt']
-        self.content = server_fetch.news['articles'][1]['content'][0:-14]
-        pass
-        '''
-    @staticmethod 
-    def rettime():
-        return server_fetch.server_fetch.rettime
-    def fetch(self,code):
-        server_fetch.response = requests.get(f'https://restcountries.com/v3.1/alpha/{code}').json()
-        return server_fetch.response[0]
-
-
-    def fetch_assign(self,code):
-        server_fetch.response = requests.get(f'https://restcountries.com/v3.1/alpha/{code}').json()
-        self.native_name = f'Autochthonous Name: '+list(server_fetch.response[0]['name']['nativeName'].items())[0][1]['official'] #get native language name
-        self.name = f'Anglophone Name: '+server_fetch.response[0]['name']['common'] #get name
-        self.capital = f'Administrative Center: '+server_fetch.response[0]['capital'][0] #get capital
-        self.subregion = f'Subregion: '+server_fetch.response[0]['subregion'] #get region
-        self.lang = f'Lingua Franca: '+list(server_fetch.response[0]['languages'].items())[0][1] #get lang
-        self.pop = f'Population: '+ str(server_fetch.response[0]['population']) #get pop
-        self.time = f'Timezone (UTC): ' + server_fetch.response[0]['timezones'][0] #timezone
+        all_news = f'<h1 font-size:25px;>Current Events</h1><br><base target="_blank" ><br>'
         try:
-            self.gini = f'Gini Income Inequality Index: '+str(list(server_fetch.response[0]['gini'].values())[0])+ ' per ' + str(list(server_fetch.response[0]['gini'].keys())[0]) #gini index
-        except(KeyError):
-            self.gini = f'Gini Income Inequality Index: '+ 'N/A'
-        
-        try:
-            self.money = f'Fiat Currency: '+ str(list(server_fetch.response[0]['currencies'].items())[0][1]['name'])+ ' '+ str(list(server_fetch.response[0]['currencies'].items())[0][1]['symbol']) #currrency #currencu symb
+            for i in response_object['articles']: 
+                imageurl, title, descrip, urllink = i['urlToImage'],  i['title'],\
+                i['description'], i['url']
+                all_news += f'<img src="{imageurl}" style="width:130px;height:100px;"><br><b>\
+                <h2 style="font-size:20px;">{title}</h2></b>{descrip}<br><a href="{urllink}">Article Link</a><br><br>'
+        except: print('error has occured')
 
-        except(KeyError):
-            self.money = f'Fiat Currency: '+ str(list(server_fetch.response[0]['currencies'].items())[0][1]['name']) #currrency #currencu symb
+        return all_news
+        #------------------------------------------------------------------------------------------------------------------------------------------------
+            #         {
+            #     "pagination": {
+            #         "limit": 100,
+            #         "offset": 0,
+            #         "count": 100,
+            #         "total": 293
+            #     },
+            #     "data": [
+            #         {
+            #             "author": "CNN Staff",
+            #             "title": "This may be the big winner of the market crash",
+            #             "description": "This may be the big winner of the market crash",
+            #             "url": "http://rss.cnn.com/~r/rss/cnn_topstories/~3/KwE80_jkKo8/a-sa-dd-3",
+            #             "source": "CNN",
+            #             "image": "https://cdn.cnn.com/cnnnext/dam/assets/150325082152-social-gfx-cnn-logo-super-169.jpg",
+            #             "category": "general",
+            #             "language": "en",
+            #             "country": "us",
+            #             "published_at": "2020-07-17T23:35:06+00:00"
+            #         },
+            #         [...]
+            #     ]
+            # }
+            #---------------------------------------------------------------------------------------------------------------------------------------------------
 
-    def raw_print(self,code):
-        server_fetch.response = requests.get(f'https://restcountries.com/v3.1/alpha/{code}').json()
-        print(server_fetch.response)
         
+            #print(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower())
+            #country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower()) 
+            #print(api.server_fetch.news)#try lower case if not working
+            #tot = api.server_fetch.news['totalResults']
+            #print('_---------------',int( api.server_fetch.news['totalResults']))
+            
+
+                
+                    #print('in loop')
+                    #print(i['properties']['ADMIN'])
+                    #print(idx)
+                    #print(ticker)
+                #print('OUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
+                #print(ticker)
+                #print(i['properties']['ADMIN'])
+                #print(idx)
         #next order of business:: get the pop and try to do the images of flag
-    def printer(self):
-        print(self.native_name)
-        print(self.name)
-        print(self.capital)
-        print(self.subregion)
-        print(self.lang)
-        print(self.pop)
-        print(self.time)
-        print(self.gini)
-        print(self.money)
 
 
-    
-    def get_news_if(self,code):
-        
-        return requests.get(f'https://newsapi.org/v2/everything?q={code}domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
-
+#------------------------------------------------------------------------------------------------------------------------------------------------------
     def form_str(self,code):
         #most  ofthe time is taken here
 
@@ -258,5 +262,5 @@ class server_fetch:
 
 if __name__ == '__main__':
     y = server_fetch()
-    print(y.raw_print('chn'))
+    print(y.form_str('chn'))
     

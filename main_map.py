@@ -172,69 +172,18 @@ class nation:
             zoom_on_click = True,
             name = i['properties']['ADMIN'],
             style_function=lambda x:bordersStyle)
-        all_news = f'<h1 font-size:25px;>Current Events</h1><br><base target="_blank" >' #still need to test without scroll
+         #still need to test without scroll
         iso3 = i['properties']['ISO_A3']
-        response_object  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower(),'53dd1a1eb44bcc6047ba7d1a87d05a63') 
-        print(response_object)
+
+        #---------REPLACE BASED ON API
+        all_news  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').name,'9d00f1ed20454836b2b1b30b5f84530a') #formated html for the news popup
+
         #TESTER__________________________________________________________
         # temp = '<br><a href="https://www.brookings.edu/">Article Link</a>'
         # all_news += temp
         #<base target= '_blank'/> works forthte time being
         
         #media stack response object incldues the pagination and data object
-        
-        #------------------------------------------------------------------------------------------------------------------------------------------------
-            #         {
-            #     "pagination": {
-            #         "limit": 100,
-            #         "offset": 0,
-            #         "count": 100,
-            #         "total": 293
-            #     },
-            #     "data": [
-            #         {
-            #             "author": "CNN Staff",
-            #             "title": "This may be the big winner of the market crash",
-            #             "description": "This may be the big winner of the market crash",
-            #             "url": "http://rss.cnn.com/~r/rss/cnn_topstories/~3/KwE80_jkKo8/a-sa-dd-3",
-            #             "source": "CNN",
-            #             "image": "https://cdn.cnn.com/cnnnext/dam/assets/150325082152-social-gfx-cnn-logo-super-169.jpg",
-            #             "category": "general",
-            #             "language": "en",
-            #             "country": "us",
-            #             "published_at": "2020-07-17T23:35:06+00:00"
-            #         },
-            #         [...]
-            #     ]
-            # }
-            #---------------------------------------------------------------------------------------------------------------------------------------------------
-
-        
-            #print(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower())
-            #country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').alpha_2.lower()) 
-            #print(api.server_fetch.news)#try lower case if not working
-            #tot = api.server_fetch.news['totalResults']
-            #print('_---------------',int( api.server_fetch.news['totalResults']))
-        try:
-            for i in response_object['data']: 
-                imageurl, title, descrip, urllink = i['image'],  i['title'],\
-                i['description'], i['url']
-                all_news += f'<img src="{imageurl}" style="width:130px;height:100px;"><br><b>\
-                <h2 style="font-size:20px;">{title}</h2></b>{descrip}<br><a href="{urllink}">Article Link</a><br>'
-        except: print('error')
-            
-
-                
-                    #print('in loop')
-                    #print(i['properties']['ADMIN'])
-                    #print(idx)
-                    #print(ticker)
-                #print('OUTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT')
-                #print(ticker)
-                #print(i['properties']['ADMIN'])
-                #print(idx)
-        
-        
 
         #print(f'survived for {iso3}')
         #all_news += ''
