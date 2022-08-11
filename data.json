@@ -1,0 +1,1416 @@
+[
+  {
+    "country": "China",
+    "exports": "2723250.4300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.1078",
+    "mainExport2019": "Broadcasting Equipment"
+  },
+  {
+    "country": "United States",
+    "exports": 2123410,
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.1026",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Germany",
+    "exports": "1669993.5100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0762",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Japan",
+    "exports": "785365.7500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0373",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "United Kingdom",
+    "exports": "770478.6200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0358",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "France",
+    "exports": "733165.4000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0359",
+    "mainExport2019": "Planes, Helicopters, and/or Spacecraft"
+  },
+  {
+    "country": "Netherlands",
+    "exports": "711504.8000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0314",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Hong Kong",
+    "exports": "612566.5200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0277",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Singapore",
+    "exports": "599216.2800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0270",
+    "mainExport2019": "Integrated Circuits"
+  },
+  {
+    "country": "South Korea",
+    "exports": "596945.2000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0292",
+    "mainExport2019": "Integrated Circuits"
+  },
+  {
+    "country": "Ireland",
+    "exports": "558393.9100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0192",
+    "mainExport2019": "Blood, antisera, vaccines, toxins, and cultures"
+  },
+  {
+    "country": "Italy",
+    "exports": "555043.2000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0266",
+    "mainExport2019": "Packaged Medicaments"
+  },
+  {
+    "country": "India",
+    "exports": "496486.3600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0219",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Canada",
+    "exports": "476044.9800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0226",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Switzerland",
+    "exports": "468966.6200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0198",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Mexico",
+    "exports": "431431.7200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0195",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Belgium",
+    "exports": "417560.8600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0183",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "United Arab Emirates",
+    "exports": "404046.2900",
+    "dataYear": 2019,
+    "percGlobalExports2018": "0.0159",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Spain",
+    "exports": "392402.6200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0203",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Russia",
+    "exports": "378635.8500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0207",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Poland",
+    "exports": "335209.3800",
+    "dataYear": 2020,
+    "mainExport2019": "Vehicle Parts"
+  },
+  {
+    "country": "Australia",
+    "exports": "318466.2800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0127",
+    "mainExport2019": "Iron Ore"
+  },
+  {
+    "country": "Vietnam",
+    "exports": "286206.8900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0105",
+    "mainExport2019": "Broadcasting Equipment"
+  },
+  {
+    "country": "Thailand",
+    "exports": "258155.1600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0133",
+    "mainExport2019": "Office Machine Parts"
+  },
+  {
+    "country": "Brazil",
+    "exports": "243738.8500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0114",
+    "mainExport2019": "Soybeans"
+  },
+  {
+    "country": "Sweden",
+    "exports": "241149.6700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0103",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Austria",
+    "exports": "222846.5300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0103",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Malaysia",
+    "exports": "207035.0900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0100",
+    "mainExport2019": "Integrated Circuits"
+  },
+  {
+    "country": "Turkey",
+    "exports": "206374.0100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0099",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Denmark",
+    "exports": "195424.8600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0082",
+    "mainExport2019": "Packaged Medicaments"
+  },
+  {
+    "country": "Saudi Arabia",
+    "exports": "184429.4900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0128",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Indonesia",
+    "exports": "181713.7500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0089",
+    "mainExport2019": "Coal Briquettes"
+  },
+  {
+    "country": "Czech Republic",
+    "exports": "174167.7900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0078",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Luxembourg",
+    "exports": "150147.0700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0061",
+    "mainExport2019": "Iron Blocks"
+  },
+  {
+    "country": "Hungary",
+    "exports": "123836.5600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0055",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Norway",
+    "exports": "117886.3300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0067",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Israel",
+    "exports": "114116.9900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0045",
+    "mainExport2019": "Diamonds"
+  },
+  {
+    "country": "Finland",
+    "exports": "97609.8000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0043",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "South Africa",
+    "exports": "93179.1500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0045",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Romania",
+    "exports": "92665.4600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0041",
+    "mainExport2019": "Vehicle Parts"
+  },
+  {
+    "country": "Philippines",
+    "exports": "91052.3200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0043",
+    "mainExport2019": "Integrated Circuits"
+  },
+  {
+    "country": "Slovakia",
+    "exports": "89856.0500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0041",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Iraq",
+    "exports": "88902.9000",
+    "dataYear": 2019,
+    "percGlobalExports2018": "0.0038",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Portugal",
+    "exports": "84633.1500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0043",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Venezuela",
+    "exports": "80524.2300",
+    "dataYear": 2014,
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Chile",
+    "exports": "79789.6000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0034",
+    "mainExport2019": "Copper Ore"
+  },
+  {
+    "country": "Kuwait",
+    "exports": "72583.9300",
+    "dataYear": 2019,
+    "percGlobalExports2018": "0.0032",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Qatar",
+    "exports": "70933.2400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0042",
+    "mainExport2019": "Petroleum Gas"
+  },
+  {
+    "country": "Argentina",
+    "exports": "64589.9600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0031",
+    "mainExport2019": "Soybean Meal"
+  },
+  {
+    "country": "Ukraine",
+    "exports": "60740.0200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0024",
+    "mainExport2019": "Corn"
+  },
+  {
+    "country": "Greece",
+    "exports": "60397.0500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0034",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Kazakhstan",
+    "exports": "51711.3400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0027",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Egypt",
+    "exports": "47875.7400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0019",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Iran",
+    "exports": "46323.0300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0040",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Oman",
+    "exports": "46185.7200",
+    "dataYear": 2019,
+    "percGlobalExports2018": "0.0017",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "New Zealand",
+    "exports": "45908.1200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0024",
+    "mainExport2019": "Concentrated Milk"
+  },
+  {
+    "country": "Peru",
+    "exports": "45118.8900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0023",
+    "mainExport2019": "Copper Ore"
+  },
+  {
+    "country": "Slovenia",
+    "exports": "41737.2000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0019",
+    "mainExport2019": "Packaged Medicaments"
+  },
+  {
+    "country": "Lithuania",
+    "exports": "41562.8300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0016",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Morocco",
+    "exports": "40069.7100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0019",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Bangladesh",
+    "exports": "38733.7600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0016",
+    "mainExport2019": "Non-Knit Men's Suits"
+  },
+  {
+    "country": "Bulgaria",
+    "exports": "38665.0900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0018",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Nigeria",
+    "exports": "38169.5100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0025",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Belarus",
+    "exports": "37300.1700",
+    "dataYear": 2020,
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Colombia",
+    "exports": "36702.1200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0022",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Bahrain",
+    "exports": "29564.3600",
+    "dataYear": 2019,
+    "percGlobalExports2018": "0.0012",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Pakistan",
+    "exports": "26343.9600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0011",
+    "mainExport2019": "House Linens"
+  },
+  {
+    "country": "Algeria",
+    "exports": "26103.3600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0018",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Serbia",
+    "exports": "25727.9500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0010",
+    "mainExport2019": "Insulated Wire"
+  },
+  {
+    "country": "Croatia",
+    "exports": "24039.8300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0013",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Myanmar",
+    "exports": "22615.1400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0008",
+    "mainExport2019": "Petroleum Gas"
+  },
+  {
+    "country": "Ecuador",
+    "exports": "22263.9900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0010",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Ghana",
+    "exports": "22081.4100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0009",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Angola",
+    "exports": "22059.2100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0017",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Estonia",
+    "exports": "21815.5900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0009",
+    "mainExport2019": "Broadcasting Equipment"
+  },
+  {
+    "country": "Panama",
+    "exports": "21379.1700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0011",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Malta",
+    "exports": "20591.3600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0009",
+    "mainExport2019": "Integrated Circuits"
+  },
+  {
+    "country": "Latvia",
+    "exports": "20334.7000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0009",
+    "mainExport2019": "Sawn Wood"
+  },
+  {
+    "country": "Costa Rica",
+    "exports": "19488.9800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0009",
+    "mainExport2019": "Medical Instruments"
+  },
+  {
+    "country": "Tunisia",
+    "exports": "19445.3600",
+    "dataYear": 2018,
+    "percGlobalExports2018": "0.0008",
+    "mainExport2019": "Insulated Wire"
+  },
+  {
+    "country": "Cyprus",
+    "exports": "18711.8000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0008",
+    "mainExport2019": "Passenger and Cargo Ships"
+  },
+  {
+    "country": "Cambodia",
+    "exports": "15793.2300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0006",
+    "mainExport2019": "Knit Sweaters"
+  },
+  {
+    "country": "Azerbaijan",
+    "exports": "15208.7600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0010",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Uzbekistan",
+    "exports": "14547.1700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0006",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Dominican Republic",
+    "exports": "14425.1900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0008",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "DR Congo",
+    "exports": "13935.2900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0007",
+    "mainExport2019": "Refined Copper"
+  },
+  {
+    "country": "Uruguay",
+    "exports": "13607.3900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0007",
+    "mainExport2019": "Sulfate Chemical Woodpulp"
+  },
+  {
+    "country": "Sri Lanka",
+    "exports": "13379.0700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0008",
+    "mainExport2019": "Tea"
+  },
+  {
+    "country": "Ivory Coast",
+    "exports": "13221.5700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0005",
+    "mainExport2019": "Cocoa Beans"
+  },
+  {
+    "country": "Guatemala",
+    "exports": "13111.5500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0005",
+    "mainExport2019": "Bananas"
+  },
+  {
+    "country": "Paraguay",
+    "exports": "11933.0900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0006",
+    "mainExport2019": "Soybeans"
+  },
+  {
+    "country": "Jordan",
+    "exports": "10365.2100",
+    "dataYear": 5050,
+    "percGlobalExports2018": "0.0006",
+    "mainExport2019": "Potassic Fertilizers"
+  },
+  {
+    "country": "Kenya",
+    "exports": "9776.1000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0005",
+    "mainExport2019": "Tea"
+  },
+  {
+    "country": "Turkmenistan",
+    "exports": 9239,
+    "dataYear": 2018,
+    "percGlobalExports2018": "0.0004",
+    "mainExport2019": "Petroleum Gas"
+  },
+  {
+    "country": "Tanzania",
+    "exports": "8921.7700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Cuba",
+    "exports": 8769,
+    "dataYear": 2020,
+    "mainExport2019": "Rolled Tobacco"
+  },
+  {
+    "country": "Zambia",
+    "exports": "8473.9900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0004",
+    "mainExport2019": "Raw Copper"
+  },
+  {
+    "country": "Honduras",
+    "exports": "8335.9500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0004",
+    "mainExport2019": "Knit Sweaters"
+  },
+  {
+    "country": "Guinea",
+    "exports": "8333.0200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Mongolia",
+    "exports": "7676.3100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Coal Briquettes"
+  },
+  {
+    "country": "Ethiopia",
+    "exports": "7631.6400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Coffee"
+  },
+  {
+    "country": "Bolivia",
+    "exports": "7448.7400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0004",
+    "mainExport2019": "Petroleum Gas"
+  },
+  {
+    "country": "Iceland",
+    "exports": "7436.0300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0005",
+    "mainExport2019": "Raw Aluminium"
+  },
+  {
+    "country": "Gabon",
+    "exports": "7304.2700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Libya",
+    "exports": "7239.3400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0012",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Brunei",
+    "exports": "6886.0700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Petroleum Gas"
+  },
+  {
+    "country": "Bosnia and Herzegovina",
+    "exports": "6885.4800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Electricity"
+  },
+  {
+    "country": "Zimbabwe",
+    "exports": "6715.4400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "El Salvador",
+    "exports": "6290.3700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Knit T-shirts"
+  },
+  {
+    "country": "Mozambique",
+    "exports": "6271.2300",
+    "dataYear": 2019,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Coal Briquettes"
+  },
+  {
+    "country": "Lebanon",
+    "exports": "6237.4100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0005",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Cameroon",
+    "exports": "6134.9800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Georgia",
+    "exports": "5909.3900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0004",
+    "mainExport2019": "Copper Ore"
+  },
+  {
+    "country": "Uganda",
+    "exports": "5796.0200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Republic of the Congo",
+    "exports": "5524.7700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0004",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Nicaragua",
+    "exports": "5341.7800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Knit T-shirts"
+  },
+  {
+    "country": "Laos",
+    "exports": "5284.4500",
+    "dataYear": 2016,
+    "mainExport2019": "Electricity"
+  },
+  {
+    "country": "Jamaica",
+    "exports": "5234.9100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Aluminium Oxide"
+  },
+  {
+    "country": "Djibouti",
+    "exports": "5193.1100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Other Animals"
+  },
+  {
+    "country": "Mali",
+    "exports": "5106.7800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Senegal",
+    "exports": "5076.6100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Botswana",
+    "exports": "4681.1300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Diamonds"
+  },
+  {
+    "country": "Burkina Faso",
+    "exports": "4467.7800",
+    "dataYear": 2019,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "South Sudan",
+    "exports": "4397.3600",
+    "dataYear": 2015,
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Equatorial Guinea",
+    "exports": "4341.9700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0003",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Armenia",
+    "exports": "3762.4900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Copper Ore"
+  },
+  {
+    "country": "Namibia",
+    "exports": "3544.1300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Raw Copper"
+  },
+  {
+    "country": "Albania",
+    "exports": "3440.6900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Leather Footwear"
+  },
+  {
+    "country": "Cayman Islands",
+    "exports": "3372.6100",
+    "dataYear": 2020,
+    "mainExport2019": "Recreational Boats"
+  },
+  {
+    "country": "Mauritius",
+    "exports": "3276.6200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Processed Fish"
+  },
+  {
+    "country": "Moldova",
+    "exports": "3161.4800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Insulated Wire"
+  },
+  {
+    "country": "Mauritania",
+    "exports": "3147.6700",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Iron Ore"
+  },
+  {
+    "country": "Benin",
+    "exports": "3110.3500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Raw Cotton"
+  },
+  {
+    "country": "Syria",
+    "exports": "2891.4000",
+    "dataYear": 2019,
+    "mainExport2019": "Pure Olive Oil"
+  },
+  {
+    "country": "Chad",
+    "exports": "2862.7400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Papua New Guinea",
+    "exports": 2834,
+    "dataYear": 2004,
+    "mainExport2019": "Petroleum Gas"
+  },
+  {
+    "country": "San Marino",
+    "exports": "2650.8000",
+    "dataYear": 2019,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Washing and Bottling Machines"
+  },
+  {
+    "country": "Madagascar",
+    "exports": "2628.8300",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Vanilla"
+  },
+  {
+    "country": "Kyrgyzstan",
+    "exports": "2424.5400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Bahamas",
+    "exports": "2405.2000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Passenger and Cargo Ships"
+  },
+  {
+    "country": "Aruba",
+    "exports": "2363.2000",
+    "dataYear": 2018,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Suriname",
+    "exports": "2295.4800",
+    "dataYear": 2010,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Nepal",
+    "exports": "2275.2600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Palm Oil"
+  },
+  {
+    "country": "Barbados",
+    "exports": "2188.2000",
+    "dataYear": 2019,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Hard Liquor"
+  },
+  {
+    "country": "Rwanda",
+    "exports": "1966.5900",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "New Caledonia",
+    "exports": "1927.2700",
+    "dataYear": 2017,
+    "mainExport2019": "Ferroalloys"
+  },
+  {
+    "country": "Maldives",
+    "exports": "1851.7000",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": "Fish Fillets"
+  },
+  {
+    "country": "Curacao",
+    "exports": "1790.7300",
+    "dataYear": 2016,
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Eswatini",
+    "exports": "1788.6800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Laboratory Glassware"
+  },
+  {
+    "country": "Faroe Islands",
+    "exports": "1788.6800",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001"
+  },
+  {
+    "country": "Togo",
+    "exports": "1653.5100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Niger",
+    "exports": "1413.6600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Tajikistan",
+    "exports": "1397.0500",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Yemen",
+    "exports": "1308.5900",
+    "dataYear": 2018,
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Timor-Leste",
+    "exports": "1307.5500",
+    "dataYear": 2020,
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Montenegro",
+    "exports": "1240.0400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Raw Aluminium"
+  },
+  {
+    "country": "Fiji",
+    "exports": "1235.0600",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Water"
+  },
+  {
+    "country": "Greenland",
+    "exports": "1156.6000",
+    "dataYear": 2019,
+    "mainExport2019": "Non-fillet Frozen Fish"
+  },
+  {
+    "country": "Haiti",
+    "exports": "1110.0200",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Knit T-shirts"
+  },
+  {
+    "country": "Lesotho",
+    "exports": "883.9500",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Diamonds"
+  },
+  {
+    "country": "Somalia",
+    "exports": "825.3600",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Sint Maarten",
+    "exports": 800,
+    "dataYear": 2018
+  },
+  {
+    "country": "Seychelles",
+    "exports": "790.9100",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Guyana",
+    "exports": "698.0400",
+    "dataYear": 2005,
+    "mainExport2019": "Special Purpose Ships"
+  },
+  {
+    "country": "Bhutan",
+    "exports": "689.7400",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Ferroalloys"
+  },
+  {
+    "country": "Sierra Leone",
+    "exports": "613.1900",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Titanium Ore"
+  },
+  {
+    "country": "Antigua and Barbuda",
+    "exports": "598.8700",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Passenger and Cargo Ships"
+  },
+  {
+    "country": "Belize",
+    "exports": "590.9400",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Raw Sugar"
+  },
+  {
+    "country": "Northern Mariana Islands",
+    "exports": 497,
+    "dataYear": 2019,
+    "mainExport2019": "Scrap Iron"
+  },
+  {
+    "country": "American Samoa",
+    "exports": 426,
+    "dataYear": 2020,
+    "mainExport2019": "Animal Meal and Pellets"
+  },
+  {
+    "country": "Solomon Islands",
+    "exports": "424.4300",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Rough Wood"
+  },
+  {
+    "country": "Cape Verde",
+    "exports": "423.3900",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Processed Fish"
+  },
+  {
+    "country": "Central African Republic",
+    "exports": "390.6500",
+    "dataYear": 2020,
+    "mainExport2019": "Rough Wood"
+  },
+  {
+    "country": "Eritrea",
+    "exports": "374.9000",
+    "dataYear": 2011
+  },
+  {
+    "country": "Guam",
+    "exports": 371,
+    "dataYear": 2020,
+    "mainExport2019": "Scrap Iron"
+  },
+  {
+    "country": "Afghanistan",
+    "exports": "357.7800",
+    "dataYear": 1978,
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Samoa",
+    "exports": "225.0500",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Refined Petroleum"
+  },
+  {
+    "country": "Guinea-Bissau",
+    "exports": "205.9900",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Coconuts Brazil Nuts and Cashews"
+  },
+  {
+    "country": "French Polynesia",
+    "exports": "168.8100",
+    "dataYear": 2000,
+    "mainExport2019": "Pearls"
+  },
+  {
+    "country": "Dominica",
+    "exports": "161.9600",
+    "dataYear": 2018,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Medical Instruments"
+  },
+  {
+    "country": "Vanuatu",
+    "exports": "156.8600",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Non-fillet Frozen Fish"
+  },
+  {
+    "country": "Gambia",
+    "exports": "149.4100",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Rough Wood"
+  },
+  {
+    "country": "Burundi",
+    "exports": "141.6400",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Micronesia",
+    "exports": "96.9000",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Non-fillet Frozen Fish"
+  },
+  {
+    "country": "Sudan",
+    "exports": "92.9400",
+    "dataYear": 2020,
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "Tonga",
+    "exports": "92.7000",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Other Vegetables"
+  },
+  {
+    "country": "Marshall Islands",
+    "exports": "85.5300",
+    "dataYear": 2020,
+    "mainExport2019": "Passenger and Cargo Ships"
+  },
+  {
+    "country": "Comoros",
+    "exports": "68.8700",
+    "dataYear": 2020,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Cloves"
+  },
+  {
+    "country": "Nauru",
+    "exports": "23.6000",
+    "dataYear": 2019,
+    "mainExport2019": "Non-fillet Frozen Fish"
+  },
+  {
+    "country": "Kiribati",
+    "exports": "18.9500",
+    "dataYear": 2018,
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Non-fillet Frozen Fish"
+  },
+  {
+    "country": "North Korea",
+    "mainExport2019": "Watch Movements"
+  },
+  {
+    "country": "Taiwan",
+    "mainExport2019": "Integrated Circuits"
+  },
+  {
+    "country": "Malawi",
+    "mainExport2019": "Raw Tobacco"
+  },
+  {
+    "country": "Liberia",
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Special Purpose Ships"
+  },
+  {
+    "country": "Palestine",
+    "percGlobalExports2018": "0.0001",
+    "mainExport2019": "Tropical Fruits"
+  },
+  {
+    "country": "Puerto Rico",
+    "percGlobalExports2018": "0.0025"
+  },
+  {
+    "country": "Trinidad and Tobago",
+    "mainExport2019": "Petroleum Gas"
+  },
+  {
+    "country": "Saint Lucia",
+    "mainExport2019": "Crude Petroleum"
+  },
+  {
+    "country": "Grenada",
+    "mainExport2019": "Non-fillet Fresh Fish"
+  },
+  {
+    "country": "Saint Vincent and the Grenadines",
+    "mainExport2019": "Petroleum Gas"
+  },
+  {
+    "country": "Andorra",
+    "mainExport2019": "Integrated Circuits"
+  },
+  {
+    "country": "Bermuda",
+    "percGlobalExports2018": "0.0002",
+    "mainExport2019": " Planes Helicopters and/or Spacecraft"
+  },
+  {
+    "country": "Saint Kitts and Nevis",
+    "mainExport2019": "Low-voltage Protection Equipment"
+  },
+  {
+    "country": "Turks and Caicos Islands",
+    "mainExport2019": "Plastic Building Materials"
+  },
+  {
+    "country": "Gibraltar",
+    "mainExport2019": "Cars"
+  },
+  {
+    "country": "Saint Martin",
+    "mainExport2019": "Gold"
+  },
+  {
+    "country": "British Virgin Islands",
+    "mainExport2019": "Recreational Boats"
+  },
+  {
+    "country": "Palau",
+    "percGlobalExports2018": 0,
+    "mainExport2019": "Non-fillet Fresh Fish"
+  },
+  {
+    "country": "Cook Islands",
+    "mainExport2019": "Non-fillet Frozen Fish"
+  },
+  {
+    "country": "Anguilla",
+    "mainExport2019": "Packaged Medicaments"
+  },
+  {
+    "country": "Wallis and Futuna",
+    "mainExport2019": "Integrated Circuits"
+  },
+  {
+    "country": "Tuvalu",
+    "mainExport2019": "Non-fillet Frozen Fish"
+  },
+  {
+    "country": "Saint Pierre and Miquelon",
+    "mainExport2019": "Processed Crustaceans"
+  },
+  {
+    "country": "Montserrat",
+    "mainExport2019": "Sand"
+  },
+  {
+    "country": "Falkland Islands",
+    "mainExport2019": "Molluscs"
+  },
+  {
+    "country": "Niue",
+    "mainExport2019": "Passenger and Cargo Ships"
+  },
+  {
+    "country": "Tokelau",
+    "mainExport2019": "Oscilloscopes"
+  }
+]

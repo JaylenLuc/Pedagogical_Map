@@ -267,34 +267,16 @@ class server_fetch:
                 #'<img src="data:image/jpeg;base64,{}">'
                 #print(code)
                 pop = server_fetch.response[i]['population']
-
-                #print('codeeee :',code, ' and the iso3: ',pycountry.countries.get(alpha_3=f'{code}'))
-                #print('NAMMEEEEEE::   ',server_fetch.co2[pycountry.countries.get(alpha_3=f'{code}').name]["iso_code"])
-                #print('---------',server_fetch.co2[pycountry.countries.get(alpha_3=f'{code}').name]['data'][-1])
-
-                #print(pycountry.countries.get(alpha_3=f'{code}').name)
-
-                #print(i)
-                #print(server_fetch.co2[ir['properties']['ADMIN']])
-                
-                #print(type(server_fetch.co2))
-                #print('CODE: ',code)
                 try:carbon = server_fetch.co2[ir['properties']['ADMIN']]['data'][-1]['co2']#Annual production-based emissions of carbon dioxide (CO2), measured in million tonnes. This is based on territorial emissions, which do not account for emissions embedded in traded goods.
                 except KeyError:
                     try: carbon = server_fetch.co2[pycountry.countries.get(alpha_3=f'{code}').name]['data'][-1]['co2']
                     except Exception as e : carbon = 'N/A'
-                        #print('CO2 excception: ',e)
-                        #carbon = 'N/A'
-                
+                   
                 try:ccap = server_fetch.co2[ir['properties']['ADMIN']]['data'][-1]['co2_per_capita']
                 except KeyError:
                     try: ccap = server_fetch.co2[pycountry.countries.get(alpha_3=f'{code}').name]['data'][-1]['co2_per_capita']
                     except Exception as e : ccap = 'N/A'
 
-
-
-                #print('c amount: ',carbon)
-                #ghg = server_fetch.co2[pycountry.countries.get(alpha_3=f'{code}').name]['data'][:-1]['co2']#Total greenhouse gas emissions including land-use change and forestry, measured in million tonnes of carbon dioxide-equivalents.
                 if type(carbon) != str:
                     if float(carbon) > 500:style = '<style>prp {color:#FF0000; display:inline;}</style> '
                     elif float(carbon) <= 500 and float(carbon) > 150:style = '<style>prp {color:#FFA500; display:inline;}</style> '
@@ -302,19 +284,11 @@ class server_fetch:
                     carbon =  style + '<prp>' + str(carbon) + '</prp>'
 
 
-                # if type(ghgg) != str:
-                #     if float(ghgg) > 500:style = '<style>prx {color:#FF0000; display:inline;}</style> '
-                #     elif float(ghgg) <= 500 and float(ghgg) > 150:style = '<style>prx {color:#FFA500; display:inline;}</style> '
-                #     elif float(ghgg) <= 150 :style = '<style>prx {color:#008000 ; display:inline;}</style> '
-                #     ghgg =  style + '<prx>' + str(ghgg) + '</prx>'
-                
-
-                # if type(ccap) != str:
-                #     if float(ccap) > 500:style = '<style>prll {color:#FF0000; display:inline;}</style> '
-                #     elif float(ccap) <= 500 and float(ccap) > 150:style = '<style>prll {color:#FFA500; display:inline;}</style> '
-                #     elif float(ccap) <= 150 :style = '<style>prll {color:#008000 ; display:inline;}</style> '
-                #     ccap =  style + '<prll>' + str(ccap) + '</prll>'
-
+                if type(ccap) != str:
+                    if float(ccap) > 14:style = '<style>prx {color:#FF0000; display:inline;}</style> '
+                    elif float(ccap) <= 14 and float(ccap) > 5:style = '<style>prx {color:#FFA500; display:inline;}</style> '
+                    elif float(ccap) <= 5 :style = '<style>prx {color:#008000 ; display:inline;}</style> '
+                    ccap =  style + '<prx>' + str(ccap) + '</prx>'
 
                 try:subrr = server_fetch.response[i]['subregion']
                 except: subrr = 'N/A'
