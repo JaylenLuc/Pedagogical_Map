@@ -21,7 +21,9 @@ class server_fetch:
     exports = ''
 #------------------------------------------------------------------------------------------------------------------------------------------------------
     def __init__(self):
-        server_fetch.response = requests.get('https://restcountries.com/v3.1/all').json()
+        try: 
+            with open('restcountries.json') as open_f: server_fetch.response = json.loads(open_f.read())
+        except: server_fetch.response = requests.get('https://restcountries.com/v3.1/all').json()
         #server_fetch.news = requests.get('https://newsapi.org/v2/everything?domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
         server_fetch.hdi=pd.read_csv(io.StringIO(requests.get(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,\
             'html.parser').find_all(text='HDI and components time-series')[0].parent['href']).content.decode('utf-8')))
