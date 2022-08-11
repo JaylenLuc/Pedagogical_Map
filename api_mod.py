@@ -7,7 +7,7 @@ import io
 from bs4 import BeautifulSoup
 from newsapi import NewsApiClient
 import http.client, urllib.parse
-
+import pycountry
 
 
 newsapi = NewsApiClient(api_key='9d00f1ed20454836b2b1b30b5f84530a')
@@ -17,13 +17,20 @@ class server_fetch:
     response = ''
     news= '' #NOT USED UNLESS CACHE
     hdi = ''
+    co2 = ''
 #------------------------------------------------------------------------------------------------------------------------------------------------------
     def __init__(self):
         server_fetch.response = requests.get('https://restcountries.com/v3.1/all').json()
         #server_fetch.news = requests.get('https://newsapi.org/v2/everything?domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
         server_fetch.hdi=pd.read_csv(io.StringIO(requests.get(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,\
             'html.parser').find_all(text='HDI and components time-series')[0].parent['href']).content.decode('utf-8')))
-#------------------------------------------------------------------------------------------------------------------------------------------------------
+
+        try:
+            with open(r'owid-co2-data.json') as open_f: server_fetch.co2 = json.loads(open_f.read())
+        except:
+            server_fetch.co2 = json.loads((requests.get(BeautifulSoup(requests.get('https://github.com/owid/co2-data').text,\
+                'html.parser').find_all(text='JSON')[0].parent['href']).content.decode('utf-8')))
+#------------------------------------- -----------------------------------------------------------------------------------------------------------------
 
     def get_news(self,coun,apikey):
         #media stack 500 per month
@@ -47,19 +54,40 @@ class server_fetch:
         #f'https://newsapi.org/v2/everything?q=+{coun}&language=en&domains=cfr.org,brookings.edu,crisisgroup.org,csis.org&apiKey={apikey}'
         #at this point, play around with news api domain param and q param for more accurate and salient results*****************************
         #another thing is perhaps add a couple more things to the hover pop up such as biggest export and import , largest mineral deposits, geography, and breif description, and demographics and gov type
-        response_object = requests.get(f'https://newsapi.org/v2/everything?q={coun}&language=en&domains=cfr.org,brookings.edu,aljazeera.com,crisisgroup.org,csis.org&apiKey={apikey}').json()
-        print(response_object)
+        response_object = requests.get(f'https://newsapi.org/v2/everything?q={coun}&language=en&domains=cfr.org,thediplomat.com,brookings.edu,crisisgroup.org,csis.org&apiKey={apikey}').json() #include aljazeera ????
 
         all_news = f'<h1 font-size:25px;>Current Events</h1><br><base target="_blank" ><br>'
         try:
+            print('TOTAL ARTICLE RESULTS: ',response_object['totalResults'])
             for i in response_object['articles']: 
                 imageurl, title, descrip, urllink = i['urlToImage'],  i['title'],\
                 i['description'], i['url']
                 all_news += f'<img src="{imageurl}" style="width:130px;height:100px;"><br><b>\
                 <h2 style="font-size:20px;">{title}</h2></b>{descrip}<br><a href="{urllink}">Article Link</a><br><br>'
-        except: print('error has occured')
+        except: print('server response protocol message: ', response_object['message'])
 
         return all_news
+
+        #NEWS API-------- exampl output
+        # {
+            #     "status": "ok",
+            #     "totalResults": 8072,
+            #     -"articles": [
+            #     -{
+            #     -"source": {
+            #     "id": "the-verge",
+            #     "name": "The Verge"
+            #     },
+            #     "author": "Justine Calma",
+            #     "title": "Texas heatwave and energy crunch curtails Bitcoin mining",
+            #     "description": "Bitcoin miners in Texas powered down to respond to an energy crunch triggered by a punishing heatwave. Energy demand from cryptomining is growing in the state.",
+            #     "url": "https://www.theverge.com/2022/7/12/23205066/texas-heat-curtails-bitcoin-mining-energy-demand-electricity-grid",
+            #     "urlToImage": "https://cdn.vox-cdn.com/thumbor/sP9sPjh-2PfK76HRsOfHNYNQWAo=/0x285:4048x2404/fit-in/1200x630/cdn.vox-cdn.com/uploads/chorus_asset/file/23761862/1235927096.jpg",
+            #     "publishedAt": "2022-07-12T15:50:17Z",
+            #     "content": "Miners voluntarily powered down as energy demand and prices spiked \r\nAn aerial view of the Whinstone US Bitcoin mining facility in Rockdale, Texas, on October 9th, 2021. The long sheds at North Ameri… [+3770 chars]"
+            #     }, [....]
+        #     ]
+        # }
         #------------------------------------------------------------------------------------------------------------------------------------------------
             #         {
             #     "pagination": {
@@ -107,13 +135,16 @@ class server_fetch:
 
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------
-    def form_str(self,code):
+    def form_str(self,code,ir):
         #most  ofthe time is taken here
-
+        #print(']]]]]]]]  ',code)
         start = time.time()
         #income = self.get_income(code)
         #response = requests.get(f'https://restcountries.com/v3.1/alpha/{code}').json()
         end = time.time()
+        
+        #print(server_fetch.response)
+        
         for i in range(250):
             #print(i)
             if server_fetch.response[i]['cca3'] == code:
@@ -144,7 +175,7 @@ class server_fetch:
                     self.money = f'<b>Fiat Currency:</b> '+ y+ ' '+ str(list(server_fetch.response[i]['currencies'].items())[0][1]['symbol']) #currrency #currencu symb
 
                 except(KeyError):
-                    self.money = f'<b>Fiat Currency:</b> '+ y #currrency #currencu symb
+                    self.money = f'<b>Fiat Currency:</b> '+ 'N/A' #currrency #currencu symb
                 t = 0
                 lang = ''
                 name= ''
@@ -235,22 +266,72 @@ class server_fetch:
                 if len(lang) != 0: lang += '</br>'
                 #'<img src="data:image/jpeg;base64,{}">'
                 #print(code)
-                
                 pop = server_fetch.response[i]['population']
 
+                #print('codeeee :',code, ' and the iso3: ',pycountry.countries.get(alpha_3=f'{code}'))
+                #print('NAMMEEEEEE::   ',server_fetch.co2[pycountry.countries.get(alpha_3=f'{code}').name]["iso_code"])
+                #print('---------',server_fetch.co2[pycountry.countries.get(alpha_3=f'{code}').name]['data'][-1])
+
+                #print(pycountry.countries.get(alpha_3=f'{code}').name)
+
+                #print(i)
+                #print(server_fetch.co2[ir['properties']['ADMIN']])
+                
+                #print(type(server_fetch.co2))
+                #print('CODE: ',code)
+                try:carbon = server_fetch.co2[ir['properties']['ADMIN']]['data'][-1]['co2']#Annual production-based emissions of carbon dioxide (CO2), measured in million tonnes. This is based on territorial emissions, which do not account for emissions embedded in traded goods.
+                except KeyError:
+                    try: carbon = server_fetch.co2[pycountry.countries.get(alpha_3=f'{code}').name]['data'][-1]['co2']
+                    except Exception as e : carbon = 'N/A'
+                        #print('CO2 excception: ',e)
+                        #carbon = 'N/A'
+                
+                try:ccap = server_fetch.co2[ir['properties']['ADMIN']]['data'][-1]['co2_per_capita']
+                except KeyError:
+                    try: ccap = server_fetch.co2[pycountry.countries.get(alpha_3=f'{code}').name]['data'][-1]['co2_per_capita']
+                    except Exception as e : ccap = 'N/A'
+
+
+
+                #print('c amount: ',carbon)
+                #ghg = server_fetch.co2[pycountry.countries.get(alpha_3=f'{code}').name]['data'][:-1]['co2']#Total greenhouse gas emissions including land-use change and forestry, measured in million tonnes of carbon dioxide-equivalents.
+                if type(carbon) != str:
+                    if float(carbon) > 500:style = '<style>prp {color:#FF0000; display:inline;}</style> '
+                    elif float(carbon) <= 500 and float(carbon) > 150:style = '<style>prp {color:#FFA500; display:inline;}</style> '
+                    elif float(carbon) <= 150 :style = '<style>prp {color:#008000 ; display:inline;}</style> '
+                    carbon =  style + '<prp>' + str(carbon) + '</prp>'
+
+
+                # if type(ghgg) != str:
+                #     if float(ghgg) > 500:style = '<style>prx {color:#FF0000; display:inline;}</style> '
+                #     elif float(ghgg) <= 500 and float(ghgg) > 150:style = '<style>prx {color:#FFA500; display:inline;}</style> '
+                #     elif float(ghgg) <= 150 :style = '<style>prx {color:#008000 ; display:inline;}</style> '
+                #     ghgg =  style + '<prx>' + str(ghgg) + '</prx>'
+                
+
+                # if type(ccap) != str:
+                #     if float(ccap) > 500:style = '<style>prll {color:#FF0000; display:inline;}</style> '
+                #     elif float(ccap) <= 500 and float(ccap) > 150:style = '<style>prll {color:#FFA500; display:inline;}</style> '
+                #     elif float(ccap) <= 150 :style = '<style>prll {color:#008000 ; display:inline;}</style> '
+                #     ccap =  style + '<prll>' + str(ccap) + '</prll>'
+
+
+                try:subrr = server_fetch.response[i]['subregion']
+                except: subrr = 'N/A'
                 #print(pop)
                 flag = server_fetch.response[i]['flags']['png']
                 ret = f'<b>Autochthonous Name:</b> '+ name + '<br>'\
                         +f'<b>Anglophone Name:</b> '+server_fetch.response[i]['name']['common']+ '<br>'+f'<img src="{flag}" style="width:114px;height:60px;">'+'<br>'\
                             +str(f'<b>Administrative Center:</b> '+ capital) + '<br>'\
-                                +str(f'<b>Subregion:</b> '+server_fetch.response[i]['subregion'])+ '<br>'\
+                                +str(f'<b>Subregion:</b> '+subrr)+ '<br>'\
                                     +  str( f'<b>Lingua Franca:</b> '+list(server_fetch.response[i]['languages'].items())[0][1])+ '<br>'\
                                         +lang + '<b>Population:</b> '+f'{pop:,}' + '<br>'\
                                                 +str(f'<b>Timezone (UTC):</b> ' + server_fetch.response[i]['timezones'][0]) + '<br>'+self.gini + '<br>'+self.money + '<br>'\
                                                     +f'<b>Human Development Index ({year}):</b> '+hdi + '</br>'+\
                                                         '<b>HDI rank: </b>'+ranked+'<br>'+f'<b>Gross National Income Per Capita (PPP):</b> {gni}'+'<br>'+\
                                                             '<b>Life Expectancy at Birth:</b> '+ le+'<br>'+'<b>Expected Years of Schooling:</b> '+eys+'<br>'+\
-                                                                '<b>Mean Years of Schooling:</b> '+ mys +'</div>'
+                                                                '<b>Mean Years of Schooling:</b> '+ mys +'<br>'+'<b>Annual emissions of carbon dioxide (CO2) (million tonnes):</b> '+carbon+'<br>'+\
+                                                                        '<b>Annual emissions of carbon dioxide (CO2) in tonnes per person:</b> '+str(ccap)+'</div>'
                 
                 server_fetch.fetch_time += end-start
                 break

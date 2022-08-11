@@ -100,27 +100,27 @@ class nation:
     classification = []
     style_func_time = 0
     c_cat = [(['MAC','HKG','CHN','PRK','KOR','JPN','TWN','SGP','VNM'],['#D12601',"Sinosphere"]),
-    (['LAO','THA','MMR','KHM','PHL','MYS','IDN','TLS'],['#cc8899',"Indo China"]),
+    (['LAO','THA','MMR','KHM','PHL','MYS','IDN','TLS','BRN'],['#cc8899',"Indo China"]),
     (['IND','PAK','BGD','LKA','MDV'],['#654321',"Hindustan"]),
     (['IRN','IRQ','SYR','SYR','ISR','PSE','LBN',\
         'SAU','YEM','OMN','ARE','QAT','BHR','KWT','AFG','JOR'],['#009000',"Middle East"]),
     (['TKM','UZB','KAZ','KGZ','TJK','MNG'],['#09EBEE',"Turkistan"]),
     (['BMU','ALA','GIB','SMR','VAT','MLT','ESP','PRT','FRA','BEL','NLD','GBR','IRL',\
         'DEU','LUX','ITA','AND','CHE','AUT','DNK','NOR','SWE','FIN','EST','FRO','ISL',\
-        'GRL','MCO','AUS','NZL'],['blue','The West']),
+        'GRL','MCO','AUS','NZL','ATF','BLM','GGY','HMD','IMN','JEY','LIE','SGS','SHN','SPM','UMI'],['blue','The West']),
     (['POL','LTU','LVA','BLR','UKR','CZE','SVK','HUN'\
         'ROU','BGR','HRV','SVN','BIH','GRC','TUR','MKD','ALB','RUS','CYP',\
         'SRB','MNE','MDA','ROU','HUN'],['purple','The Orthodoxy']),
     (['ETH','ERI','SOM','DJI'],['#376550','Cushite']),
     (['CPV','CIV','GHA','NGA','BEN','TGO','BFA','LBR','SLE','GIN','SEN',\
-        'GNB','MLI','NER','CMR','GNQ','GAB'],['#ff8c00','West Africa']),
+        'GNB','MLI','NER','CMR','GNQ','GAB','GMB','STP'],['#ff8c00','West Africa']),
     (['CAF','COD','COG','UGA','KEN','TZA','ZMB','AGO','MWI',\
-        'MOZ','ZWE','NAM','BWA','RWA','BDI'],['#FBC490','Bantu']),
+        'MOZ','ZWE','NAM','BWA','RWA','BDI','SWZ'],['#FBC490','Bantu']),
     (['ZAF','LSO'],['black','South Africa']),
     (['LBY','DZA','MAR','MRT','ESH','DZA','TUN','EGY','TCD'],['#00c300','North Africa']),
     (['SDN','SSD'],['#FFCC00','Sudan']),
     (['GEO','ARM','AZE'],['#75816b','Caucauses']),
-    (['COM','MDG','MUS'],['#800020','Madagascar']),
+    (['COM','MDG','MUS','IOT','SYC'],['#800020','Madagascar Indian Ocean']),
     (['PNG','SLB','VUT','NCL'],['#8da825','Melanesia']),
      (['FSM','MHL','MNP','GUM','PLW','NRU','KIR'],['#00008B','Micronesia']),
     (['PYF','WSM','TUV','WLF','NIU','TON','NFK','COK','PCN','FJI','ASM'],['#39FF14','Polynesia']),
@@ -132,7 +132,7 @@ class nation:
    (['ARG','URY','PRY','FLK'],['#0d98ba ','Euro-Hispanic Occupied South-West America ']),
     (['VEN','COL'],['#C49102 ','Grand colombia']),
     (['CUB','DMA','HTI','TCA','DOM','BHS','JAM','PRI','ATG','MSR',\
-        'KNA','VCT','TTO','BRB','GRD','LCA','CUW','ABW','AIA'],['#00A36C ','Caribbean'])]
+        'KNA','VCT','TTO','BRB','GRD','LCA','CUW','ABW','AIA','CYM','MAF','SXM','VGB','VIR'],['#00A36C ','Caribbean'])]
     
     c_dict = {i : v  for (li,v) in c_cat for i in li}
 
@@ -157,7 +157,7 @@ class nation:
         st = time.time()
         #print(i['properties']['ISO_A3'])
         
-        ht = country_object.form_str(i['properties']['ISO_A3'])
+        ht = country_object.form_str(i['properties']['ISO_A3'],i)
 
         en = time.time()
         
@@ -219,9 +219,11 @@ start2 = time.time()
 
 #reduce boilerplate #ALL DONE REDUCED LINES 
 
-for i in country_r['features']: 
-    try: nation.style_func(nation.c_dict[i['properties']['ISO_A3']][0],i, nation.c_dict[i['properties']['ISO_A3']][1])
-    except(KeyError): continue
+#ADD EVRYTHING COUNTRY YES
+
+
+for i in country_r['features']:  
+    if i['properties']['ISO_A3'] != 'ATA' and i['properties']['ISO_A3']  != '-99': nation.style_func(nation.c_dict[i['properties']['ISO_A3']][0],i, nation.c_dict[i['properties']['ISO_A3']][1])
 
 #findings: style func is quite fast but the for loop itself may be overbearing
 end2 = time.time()
