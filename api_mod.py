@@ -35,7 +35,7 @@ class server_fetch:
         try:
             server_fetch.exports = pd.read_csv(r'csvData.csv')
         except:
-            #too be fized
+            #too be filled
             pass
 #------------------------------------- -----------------------------------------------------------------------------------------------------------------
 
