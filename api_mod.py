@@ -18,6 +18,7 @@ class server_fetch:
     news= '' #NOT USED UNLESS CACHE
     hdi = ''
     co2 = ''
+    exports = ''
 #------------------------------------------------------------------------------------------------------------------------------------------------------
     def __init__(self):
         server_fetch.response = requests.get('https://restcountries.com/v3.1/all').json()
@@ -30,6 +31,12 @@ class server_fetch:
         except:
             server_fetch.co2 = json.loads((requests.get(BeautifulSoup(requests.get('https://github.com/owid/co2-data').text,\
                 'html.parser').find_all(text='JSON')[0].parent['href']).content.decode('utf-8')))
+        #store csv file and web scrape        
+        try:
+            server_fetch.exports = pd.read_csv(r'csvData.csv')
+        except:
+            #too be fized
+            pass
 #------------------------------------- -----------------------------------------------------------------------------------------------------------------
 
     def get_news(self,coun,apikey):
@@ -206,7 +213,6 @@ class server_fetch:
                 #print(code)
                  
                 hdi_og = server_fetch.hdi[(server_fetch.hdi['iso3'] == f'{code}')]
-                #print(hdi[f'hdi_rank_{year}'][:][1])
                 if hdi_og.empty:
                     hdi = 'N/A'
                     ranked = 'N/A'
@@ -215,12 +221,12 @@ class server_fetch:
                     mys = 'N/A'
                     eys = 'N/A'
                 else:
-                    hdi = [str(list(hdi_og[f'hdi_{year}'])[0]) if str(list(hdi_og[f'hdi_{year}'])[0]) != 'nan' else 'N/A'][0]
-                    ranked = [str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2] if str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2] != 'nan' else 'N/A'][0]
-                    gni = [str(list(hdi_og[f'gnipc_{year}'])[0]) if str(list(hdi_og[f'gnipc_{year}'])[0]) != 'nan' else 'N/A'][0]
-                    le = [str(list(hdi_og[f'le_{year}'])[0]) if str(list(hdi_og[f'le_{year}'])[0]) != 'nan' else 'N/A'][0]
-                    mys = [str(list(hdi_og[f'mys_{year}'])[0]) if str(list(hdi_og[f'mys_{year}'])[0]) != 'nan' else 'N/A'][0]
-                    eys = [str(list(hdi_og[f'eys_{year}'])[0]) if str(list(hdi_og[f'eys_{year}'])[0]) != 'nan' else 'N/A'][0]
+                    hdi = [str(list(hdi_og[f'hdi_{year}'])[0]) if str(list(hdi_og[f'hdi_{year}'])[0]) != 'NaN' else 'N/A'][0]
+                    ranked = [str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2] if str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2] != 'NaN' else 'N/A'][0]
+                    gni = [str(list(hdi_og[f'gnipc_{year}'])[0]) if str(list(hdi_og[f'gnipc_{year}'])[0]) != 'NaN' else 'N/A'][0]
+                    le = [str(list(hdi_og[f'le_{year}'])[0]) if str(list(hdi_og[f'le_{year}'])[0]) != 'NaN' else 'N/A'][0]
+                    mys = [str(list(hdi_og[f'mys_{year}'])[0]) if str(list(hdi_og[f'mys_{year}'])[0]) != 'NaN' else 'N/A'][0]
+                    eys = [str(list(hdi_og[f'eys_{year}'])[0]) if str(list(hdi_og[f'eys_{year}'])[0]) != 'NaN' else 'N/A'][0]
                     try: gni = float(gni)
                     except: pass
                 #print(name)
@@ -293,6 +299,25 @@ class server_fetch:
                 try:subrr = server_fetch.response[i]['subregion']
                 except: subrr = 'N/A'
                 #print(pop)
+
+                exp = server_fetch.exports[(server_fetch.exports['country'] == pycountry.countries.get(alpha_3=f"{code}").name)]
+
+                bige = str(*[v for k,v in exp.to_dict().items()][4].values())
+                print(code)
+                print(len(bige))
+                #hard code "DR Congo" maybe i hate this 
+                if not bige:
+                    try:
+                        exp = server_fetch.exports[(server_fetch.exports['country'] == pycountry.countries.get(alpha_3=f"{code}").common_name)]
+                        bige = str(*[v for k,v in exp.to_dict().items()][4].values())
+                        if not bige:
+                            exp = server_fetch.exports[(server_fetch.exports['country'] == ir['properties']['ADMIN'])]
+                            bige = str(*[v for k,v in exp.to_dict().items()][4].values())
+                    except:
+                        exp = server_fetch.exports[(server_fetch.exports['country'] == ir['properties']['ADMIN'])]
+                        bige = str(*[v for k,v in exp.to_dict().items()][4].values())
+
+
                 flag = server_fetch.response[i]['flags']['png']
                 ret = f'<b>Autochthonous Name:</b> '+ name + '<br>'\
                         +f'<b>Anglophone Name:</b> '+server_fetch.response[i]['name']['common']+ '<br>'+f'<img src="{flag}" style="width:114px;height:60px;">'+'<br>'\
@@ -305,7 +330,8 @@ class server_fetch:
                                                         '<b>HDI rank: </b>'+ranked+'<br>'+f'<b>Gross National Income Per Capita (PPP):</b> {gni}'+'<br>'+\
                                                             '<b>Life Expectancy at Birth:</b> '+ le+'<br>'+'<b>Expected Years of Schooling:</b> '+eys+'<br>'+\
                                                                 '<b>Mean Years of Schooling:</b> '+ mys +'<br>'+'<b>Annual emissions of carbon dioxide (CO2) (million tonnes):</b> '+carbon+'<br>'+\
-                                                                        '<b>Annual emissions of carbon dioxide (CO2) in tonnes per person:</b> '+str(ccap)+'</div>'
+                                                                        '<b>Annual emissions of carbon dioxide (CO2) in tonnes per person:</b> '+str(ccap)+'<br>'\
+                                                                            '<b>Biggest Exports: </b> '+str(bige) +'</div>'
                 
                 server_fetch.fetch_time += end-start
                 break
