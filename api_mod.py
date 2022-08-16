@@ -37,7 +37,7 @@ class server_fetch:
         try:
             server_fetch.exports = pd.read_csv(r'csvData.csv')
         except:
-            #too be filled
+            #too be web scaped if possible
             pass
 #------------------------------------- -----------------------------------------------------------------------------------------------------------------
 
@@ -63,11 +63,11 @@ class server_fetch:
         #f'https://newsapi.org/v2/everything?q=+{coun}&language=en&domains=cfr.org,brookings.edu,crisisgroup.org,csis.org&apiKey={apikey}'
         #at this point, play around with news api domain param and q param for more accurate and salient results*****************************
         #another thing is perhaps add a couple more things to the hover pop up such as biggest export and import , largest mineral deposits, geography, and breif description, and demographics and gov type
-        response_object = requests.get(f'https://newsapi.org/v2/everything?q={coun}&language=en&domains=cfr.org,thediplomat.com,brookings.edu,crisisgroup.org,csis.org&apiKey={apikey}').json() #include aljazeera ????
+        response_object = requests.get(f'https://newsapi.org/v2/everything?q={coun}&language=en&domains=cfr.org,thediplomat.com,brookings.edu,aljazeera.com,crisisgroup.org,csis.org&apiKey={apikey}').json() #include aljazeera ????
 
         all_news = f'<h1 font-size:25px;>Current Events</h1><br><base target="_blank" ><br>'
         try:
-            print('TOTAL ARTICLE RESULTS: ',response_object['totalResults'])
+            #print('TOTAL ARTICLE RESULTS: ',response_object['totalResults'])
             for i in response_object['articles']: 
                 imageurl, title, descrip, urllink = i['urlToImage'],  i['title'],\
                 i['description'], i['url']
@@ -305,8 +305,7 @@ class server_fetch:
                 exp = server_fetch.exports[(server_fetch.exports['country'] == pycountry.countries.get(alpha_3=f"{code}").name)]
 
                 bige = str(*[v for k,v in exp.to_dict().items()][4].values())
-                print(code)
-                print(len(bige))
+                
                 #hard code "DR Congo" maybe i hate this 
                 if not bige:
                     try:

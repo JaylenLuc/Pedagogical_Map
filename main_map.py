@@ -177,7 +177,7 @@ class nation:
 
         #---------REPLACE BASED ON API
         all_news  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').name,'9d00f1ed20454836b2b1b30b5f84530a') #formated html for the news popup
-
+        #all_news = ''
         #TESTER__________________________________________________________
         # temp = '<br><a href="https://www.brookings.edu/">Article Link</a>'
         # all_news += temp
@@ -320,7 +320,7 @@ folium.TileLayer('cartodbpositron').add_to(main_map)
 
 countryesearch = Search(
     layer = caps,
-    geom_type = 'Polygon',
+    geom_type = 'MultiPolygon',
     search_label='name',
     placeholder='Search for a country',
     collapsed=False,
@@ -333,7 +333,7 @@ print(f'System runtime: {end1-start1} seconds')
 print(f'form_str func time: {func_time} seconds')
 print(f'API fetching {country_object.fetch_time}')
 folium.LayerControl().add_to(main_map)
-main_map.save('output1.html')
+main_map.save('output_example.html')
 #folium.GeoJson()
 
 #folium.Marker(
