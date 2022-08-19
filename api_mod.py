@@ -8,6 +8,8 @@ from bs4 import BeautifulSoup
 from newsapi import NewsApiClient
 import http.client, urllib.parse
 import pycountry
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 
 newsapi = NewsApiClient(api_key='9d00f1ed20454836b2b1b30b5f84530a')
@@ -37,8 +39,11 @@ class server_fetch:
         try:
             server_fetch.exports = pd.read_csv(r'csvData.csv')
         except:
-            #too be web scaped if possible
-            pass
+            driver = webdriver.Chrome(executable_path=b"C:\Users\Jaylen\Downloads\chromedriver_win32 (1)\chromedriver.exe")
+
+            driver.get("https://worldpopulationreview.com/country-rankings/exports-by-country")
+
+            driver.find_element(By.LINK_TEXT,  'CSV').click()
 #------------------------------------- -----------------------------------------------------------------------------------------------------------------
 
     def get_news(self,coun,apikey):
