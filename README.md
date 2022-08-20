@@ -5,3 +5,7 @@ click on the  CSV download button for exports by country https://worldpopulation
 
 there is an autohotkey selenium module included that will automate this process but oyu will have to download selenium for python and autohotkey.
 put this file in teh same workihng directory as this project
+
+SELENIUM DOWNLOAD: https://github.com/florentbr/SeleniumBasic/releases/tag/v2.0.9.0
+
+CHROME DIRVER DOWNLOAD: https://sites.google.com/chromium.org/driver/downloads?authuser=0
