@@ -10,7 +10,8 @@ import http.client, urllib.parse
 import pycountry
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-
+import pathlib as path
+import os
 
 newsapi = NewsApiClient(api_key='9d00f1ed20454836b2b1b30b5f84530a')
 
@@ -20,7 +21,7 @@ class server_fetch:
     news= '' #NOT USED UNLESS CACHE
     hdi = ''
     co2 = ''
-    exports = ''
+    #exports = ''
 #------------------------------------------------------------------------------------------------------------------------------------------------------
     def __init__(self):
         try: 
@@ -39,11 +40,25 @@ class server_fetch:
         try:
             server_fetch.exports = pd.read_csv(r'csvData.csv')
         except:
-            driver = webdriver.Chrome(executable_path=b"C:\Users\Jaylen\Downloads\chromedriver_win32 (1)\chromedriver.exe")
+            pather = str(os.path.join(path.Path.home(), "Downloads", "chromedriver_win32","chromedriver.exe"))
+
+            driver = webdriver.Chrome(executable_path=pather)
 
             driver.get("https://worldpopulationreview.com/country-rankings/exports-by-country")
 
-            driver.find_element(By.LINK_TEXT,  'CSV').click()
+            try:
+
+                driver.find_element(By.LINK_TEXT,  'CSV').click()
+                pathlist  = path.Path(str(os.path.join(path.Path.home(), "Downloads"))).rglob('csvData.csv')
+                for i in pathlist: server_fetch.exports = pd.read_csv(i)
+                server_fetch.exports
+            except:
+                for l in driver.find_elements(By.TAG_NAME,  'a'): 
+                    if l.text == 'CSV': l.click()
+                pathlist  = path.Path(str(os.path.join(path.Path.home(), "Downloads"))).rglob('csvData.csv')
+                for i in pathlist: server_fetch.exports = pd.read_csv(i)
+                
+
 #------------------------------------- -----------------------------------------------------------------------------------------------------------------
 
     def get_news(self,coun,apikey):

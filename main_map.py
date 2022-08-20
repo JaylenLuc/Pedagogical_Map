@@ -176,6 +176,16 @@ class nation:
         iso3 = i['properties']['ISO_A3']
 
         #---------REPLACE BASED ON API
+
+            #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            
+            # albeit i dont have 500 bucks a month to shell out on unlimited API calls but 100 countries should suffice. perhaps I should do a check where I have a priority A list of countries that deserve API calls 
+            # and if and when i am creating the geojson objects i check if that i['properties']['ISO_A3'] is in the  list and if it is then call the API_MOD class method get_news and if not then dotn call the API idk just an idea.
+
+            #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
         all_news  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').name,'9d00f1ed20454836b2b1b30b5f84530a') #formated html for the news popup
         #all_news = ''
         #TESTER__________________________________________________________
