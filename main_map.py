@@ -17,6 +17,8 @@ import branca
 import pycountry
 start1 = time.time()
 
+#maybe ask for APIkey for the NEW API
+
 main_map = folium.Map(
     location=[39.9042, 116.4074],   
     max_bounds = True,
@@ -45,7 +47,8 @@ add = '/tile/{z}/{y}/{x}'
 maps = dict(Grey='https://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer',
             Divisional='https://server.arcgisonline.com/ArcGIS/rest/services/Specialty/DeLorme_World_Base_Map/MapServer',
             Topographical='https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer',
-            Terrain= 'https://services.arcgisonline.com/arcgis/rest/services/World_Terrain_Base/MapServer'
+            Terrain= 'https://server.arcgisonline.com/arcgis/rest/services/World_Physical_Map/MapServer',
+            Satellite='https://server.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer'
             )
 
 
@@ -184,8 +187,8 @@ class nation:
 
             #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
-
+        print(iso3)
+        print(pycountry.countries.get(alpha_3=f'{iso3}').name)
         all_news  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').name,'9d00f1ed20454836b2b1b30b5f84530a') #formated html for the news popup
         #all_news = ''
         #TESTER__________________________________________________________
@@ -265,7 +268,7 @@ icon3 = "folium.Icon(color='lightblue')"#Low Population (<2,000,000)
 string1 = "first.add_child(folium.Marker("+\
         "location=[i['lat'], i['lng']],"+\
         "popup=folium.Popup(html=f'<style>pz {{color:{colors}; display:inline;}}</style>'+f'<b>First Level Admin Capital:</b> \
-            {c}<br><b>Population:<b> <pz>{pop}</pz><br><b>Coordinates:</b>{long}º E / {lat}º N',"+\
+            {c}<br><b>Population:<b> <pz>{pop:,}</pz><br><b>Coordinates:</b>{long}º E / {lat}º N',"+\
         "max_width= 200),"+\
        " tooltip=f'<b>First subdivision Capital city:</b> {ci}',"
 
@@ -273,7 +276,7 @@ string1 = "first.add_child(folium.Marker("+\
 string2 = "caps.add_child(folium.Marker("+\
         "location=[v['lat'], v['lng']],"+\
         "popup=folium.Popup(html=f'<style>pz {{color:{colors}; display:inline;}}</style>'+f'<b>Capital city of:</b> \
-            {vc}<br><b>Population:</b><pz> {vpop}</pz><br><b>Coordinates:</b>{vlong}º E / {vlat}º N',"+\
+            {vc}<br><b>Population:</b><pz> {vpop:,}</pz><br><b>Coordinates:</b>{vlong}º E / {vlat}º N',"+\
         "max_width= 200),"+\
        " tooltip=f'<b>Capital city:</b> {vci}',name=f'{vc}',"
 
@@ -320,10 +323,11 @@ main_map.add_child(first)
 
 
 folium.TileLayer('Stamen Terrain').add_to(main_map)
-folium.TileLayer('cartodbdark_matter').add_to(main_map)
-folium.TileLayer('Stamen Toner').add_to(main_map)
-folium.TileLayer('Stamen Water Color').add_to(main_map)
-folium.TileLayer('cartodbpositron').add_to(main_map)
+
+# folium.TileLayer('cartodbdark_matter').add_to(main_map)
+# folium.TileLayer('Stamen Toner').add_to(main_map)
+# folium.TileLayer('Stamen Water Color').add_to(main_map)
+# folium.TileLayer('cartodbpositron').add_to(main_map)
 
 
 

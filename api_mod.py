@@ -243,12 +243,12 @@ class server_fetch:
                     mys = 'N/A'
                     eys = 'N/A'
                 else:
-                    hdi = [str(list(hdi_og[f'hdi_{year}'])[0]) if str(list(hdi_og[f'hdi_{year}'])[0]) != 'NaN' else 'N/A'][0]
-                    ranked = [str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2] if str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2] != 'NaN' else 'N/A'][0]
-                    gni = [str(list(hdi_og[f'gnipc_{year}'])[0]) if str(list(hdi_og[f'gnipc_{year}'])[0]) != 'NaN' else 'N/A'][0]
-                    le = [str(list(hdi_og[f'le_{year}'])[0]) if str(list(hdi_og[f'le_{year}'])[0]) != 'NaN' else 'N/A'][0]
-                    mys = [str(list(hdi_og[f'mys_{year}'])[0]) if str(list(hdi_og[f'mys_{year}'])[0]) != 'NaN' else 'N/A'][0]
-                    eys = [str(list(hdi_og[f'eys_{year}'])[0]) if str(list(hdi_og[f'eys_{year}'])[0]) != 'NaN' else 'N/A'][0]
+                    hdi = [str(list(hdi_og[f'hdi_{year}'])[0]) if str(list(hdi_og[f'hdi_{year}'])[0]) != 'NaN' or 'n' or 'nan' else 'N/A'][0]
+                    ranked = [str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2] if str(list(hdi_og[f'hdi_rank_{year}'])[0])[0:-2] != 'NaN' or 'n' or 'nan' else 'N/A'][0]
+                    gni = [str(list(hdi_og[f'gnipc_{year}'])[0]) if str(list(hdi_og[f'gnipc_{year}'])[0]) != 'NaN' or 'n' or 'nan' else 'N/A'][0]
+                    le = [str(list(hdi_og[f'le_{year}'])[0]) if str(list(hdi_og[f'le_{year}'])[0]) != 'NaN' or 'n' or 'nan'else 'N/A'][0]
+                    mys = [str(list(hdi_og[f'mys_{year}'])[0]) if str(list(hdi_og[f'mys_{year}'])[0]) != 'NaN' or 'n' or 'nan'else 'N/A'][0]
+                    eys = [str(list(hdi_og[f'eys_{year}'])[0]) if str(list(hdi_og[f'eys_{year}'])[0]) != 'NaN'or 'n' or 'nan'  else 'N/A'][0]
                     try: gni = float(gni)
                     except: pass
                 #print(name)
