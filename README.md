@@ -1,4 +1,7 @@
 # Pedagogical_Map
+
+static HTML file is up on git pages : https://jaylenluc.github.io/intermap_deploy/
+
 #NOTE:: ALL FILES REQUIRED MUST BE PUT IN SAME DIRECTORY
 this project  was designed to be as independant from local files as possible; however, there is one file you must download for this to work if you do not want to download selenium.
 click on the  CSV download button for exports by country https://worldpopulationreview.com/country-rankings/exports-by-country
