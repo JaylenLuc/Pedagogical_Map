@@ -83,7 +83,7 @@ class server_fetch:
         #f'https://newsapi.org/v2/everything?q=+{coun}&language=en&domains=cfr.org,brookings.edu,crisisgroup.org,csis.org&apiKey={apikey}'
         #at this point, play around with news api domain param and q param for more accurate and salient results*****************************
         #another thing is perhaps add a couple more things to the hover pop up such as biggest export and import , largest mineral deposits, geography, and breif description, and demographics and gov type
-        response_object = requests.get(f'https://newsapi.org/v2/everything?q={coun}&language=en&domains=cfr.org,thediplomat.com,brookings.edu,aljazeera.com,crisisgroup.org,csis.org&apiKey={apikey}').json() #include aljazeera ????
+        response_object = requests.get(f'https://newsapi.org/v2/everything?q={coun}&language=en&sortBy=relevancy&domains=cfr.org,thediplomat.com,brookings.edu,aljazeera.com,crisisgroup.org,csis.org&apiKey={apikey}').json() #include aljazeera ????
 
         all_news = f'<h1 font-size:25px;>Current Events</h1><br><base target="_blank" ><br>'
         try:

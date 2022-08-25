@@ -133,7 +133,7 @@ class nation:
     (['GUY','SUR','BRA'],['#F36196','Portuguese-Occupied Tupi-Guarani']),
     (['ECU','PER','BOL','CHL'],['#C19A6B ','Spanish-Occupied Inca']),
    (['ARG','URY','PRY','FLK'],['#0d98ba ','Euro-Hispanic Occupied South-West America ']),
-    (['VEN','COL'],['#C49102 ','Grand colombia']),
+    (['VEN','COL'],['#C49102 ','Grand Colombia']),
     (['CUB','DMA','HTI','TCA','DOM','BHS','JAM','PRI','ATG','MSR',\
         'KNA','VCT','TTO','BRB','GRD','LCA','CUW','ABW','AIA','CYM','MAF','SXM','VGB','VIR'],['#00A36C ','Caribbean'])]
     
