@@ -347,7 +347,7 @@ print(f'System runtime: {end1-start1} seconds')
 print(f'form_str func time: {func_time} seconds')
 print(f'API fetching {country_object.fetch_time}')
 folium.LayerControl().add_to(main_map)
-main_map.save('output1.html')
+main_map.save('index.html')
 #folium.GeoJson()
 
 #folium.Marker(
