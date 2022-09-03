@@ -139,6 +139,8 @@ class nation:
     
     c_dict = {i : v  for (li,v) in c_cat for i in li}
 
+    priority = []
+
 
     @staticmethod
     def style_func(colorsz,i,namez):
@@ -189,7 +191,8 @@ class nation:
 
         print(iso3)
         print(pycountry.countries.get(alpha_3=f'{iso3}').name)
-        all_news  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').name,'9d00f1ed20454836b2b1b30b5f84530a') #formated html for the news popup
+        all_news = f'<style> p {{text-align: center;}} h1{{text-align: center;}}</style><h1 font-size:25px;>Current Events</h1><br><base target="_blank" ><br>'
+        all_news  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').name,'9d00f1ed20454836b2b1b30b5f84530a', all_news) #formated html for the news popup
         #all_news = ''
         #TESTER__________________________________________________________
         # temp = '<br><a href="https://www.brookings.edu/">Article Link</a>'

@@ -61,7 +61,7 @@ class server_fetch:
 
 #------------------------------------- -----------------------------------------------------------------------------------------------------------------
 
-    def get_news(self,coun,apikey):
+    def get_news(self,coun,apikey, all_news):
         #media stack 500 per month
         #-------------------------------------------------------------------------
         # conn = http.client.HTTPConnection('api.mediastack.com')
@@ -85,7 +85,7 @@ class server_fetch:
         #another thing is perhaps add a couple more things to the hover pop up such as biggest export and import , largest mineral deposits, geography, and breif description, and demographics and gov type
         response_object = requests.get(f'https://newsapi.org/v2/everything?q={coun}&language=en&sortBy=publishedAt&domains=cfr.org,thediplomat.com,brookings.edu,aljazeera.com,crisisgroup.org,csis.org&apiKey={apikey}').json() #include aljazeera ????
 
-        all_news = f'<h1 font-size:25px;>Current Events</h1><br><base target="_blank" ><br>'
+        #all_news = f'p {{text-align: center;}} h1{{text-align: center;}}<h1 font-size:25px;>Current Events</h1><br><base target="_blank" ><br>'
         try:
             #print('TOTAL ARTICLE RESULTS: ',response_object['totalResults'])
             for i in response_object['articles']: 
@@ -93,7 +93,9 @@ class server_fetch:
                 i['description'], i['url']
                 all_news += f'<img src="{imageurl}" style="width:130px;height:100px;"><br><b>\
                 <h2 style="font-size:20px;">{title}</h2></b>{descrip}<br><a href="{urllink}">Article Link</a><br><br>'
-        except: print('server response protocol message: ', response_object['message'])
+        except: 
+            all_news += "<br><p> No news available at this time due to API limitations</p><br>"
+            print('server response protocol message: ', response_object['message'])
 
         return all_news
 
