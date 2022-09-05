@@ -138,7 +138,12 @@ class nation:
     
     c_dict = {i : v  for (li,v) in c_cat for i in li}
 
-    priority = []
+    priority = ['AFG','ARE','ARG','ARM','AUS','YEM','BGD','BIH','BLR','BOL','BRA','CAN','CAF','CHE','CHL','CHN','COD','COG','COL',\
+        'CUB','CYP','DEU','TUR','DNK','DZA','EGY','ECU','ERI','ESP','EST','ETH','FIN','FRA','USA','GBR','GHA','GRC','GTM','TWN',\
+           'HKG','HND','HRV','HTI','IDN','IND','IRL','IRN','IRQ','ISR','ITA','JAM','JPN','KAZ','KEN','ZAF','KHM','KOR','KWT','LBN','LBY','LKA','LSO','LTU','LVA','MAR',\
+            'MDA','MDG','MDV','MEX','MLI','MMR','VNM','UKR','MUS','MYS','NER','NGA','NIC','NLD','NOR','NPL','NZL','OMN','PAK','PER',\
+                'PHL','PNG','POL','VEN','PRK','PRT','PRY','PSE','RUS','RWA','SAU','SDN','SOM','SYR ','THA'\
+             ]
 
 
     @staticmethod
@@ -190,8 +195,11 @@ class nation:
 
         print(iso3)
         print(pycountry.countries.get(alpha_3=f'{iso3}').name)
-        all_news = f'<style> p {{text-align: center;}} h1{{text-align: center;}}</style><h1 font-size:25px;>Current Events</h1><br><base target="_blank" ><br>'
-        all_news  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').name,'9d00f1ed20454836b2b1b30b5f84530a', all_news) #formated html for the news popup
+        all_news = f'<style> p {{text-align: center;}} h1{{text-align: center;}} </style><h1 font-size:25px;>Current Events</h1><br><base target="_blank" ><br>'
+        if iso3 in nation.priority:
+            all_news  = country_object.get_news(pycountry.countries.get(alpha_3=f'{iso3}').name,'9d00f1ed20454836b2b1b30b5f84530a', all_news) #formated html for the news popup
+        else:
+            all_news += "<br><p> No news available at this time due to API limitations</p><br>"
         #all_news = ''
         #TESTER__________________________________________________________
         # temp = '<br><a href="https://www.brookings.edu/">Article Link</a>'
