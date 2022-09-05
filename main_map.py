@@ -106,14 +106,14 @@ class nation:
     (['LAO','THA','MMR','KHM','PHL','MYS','IDN','TLS','BRN'],['#cc8899',"Indo China"]),
     (['IND','PAK','BGD','LKA','MDV'],['#654321',"Hindustan"]),
     (['IRN','IRQ','SYR','SYR','ISR','PSE','LBN',\
-        'SAU','YEM','OMN','ARE','QAT','BHR','KWT','AFG','JOR'],['#009000',"Middle East"]),
-    (['TKM','UZB','KAZ','KGZ','TJK','MNG'],['#09EBEE',"Turkistan"]),
+        'SAU','YEM','OMN','ARE','QAT','BHR','KWT','AFG','JOR','TUR'],['#009000',"Middle East"]),
+    (['TKM','UZB','KAZ','KGZ','TJK','MNG','AZE'],['#09EBEE',"Turkistan"]),
     (['BMU','ALA','GIB','SMR','VAT','MLT','ESP','PRT','FRA','BEL','NLD','GBR','IRL',\
         'DEU','LUX','ITA','AND','CHE','AUT','DNK','NOR','SWE','FIN','EST','FRO','ISL',\
-        'GRL','MCO','AUS','NZL','ATF','BLM','GGY','HMD','IMN','JEY','LIE','SGS','SHN','SPM','UMI'],['blue','The West']),
-    (['POL','LTU','LVA','BLR','UKR','CZE','SVK','HUN'\
-        'ROU','BGR','HRV','SVN','BIH','GRC','TUR','MKD','ALB','RUS','CYP',\
-        'SRB','MNE','MDA','ROU','HUN'],['purple','The Orthodoxy']),
+        'GRL','MCO','AUS','NZL','ATF','BLM','GGY','HMD','IMN','JEY','LIE','SGS','SHN','SPM','UMI','HUN','CZE','SVK','HRV','POL','SVN','LVA','LTU'],['blue','The West']),
+    (['BLR','UKR',\
+        'ROU','BGR','BIH','GRC','MKD','ALB','RUS','CYP',\
+        'SRB','MNE','MDA','ROU','GEO','ARM'],['purple','The Orthodoxy']),
     (['ETH','ERI','SOM','DJI'],['#376550','Cushite']),
     (['CPV','CIV','GHA','NGA','BEN','TGO','BFA','LBR','SLE','GIN','SEN',\
         'GNB','MLI','NER','CMR','GNQ','GAB','GMB','STP'],['#ff8c00','West Africa']),
@@ -122,7 +122,6 @@ class nation:
     (['ZAF','LSO'],['black','South Africa']),
     (['LBY','DZA','MAR','MRT','ESH','DZA','TUN','EGY','TCD'],['#00c300','North Africa']),
     (['SDN','SSD'],['#FFCC00','Sudan']),
-    (['GEO','ARM','AZE'],['#75816b','Caucauses']),
     (['COM','MDG','MUS','IOT','SYC'],['#800020','Madagascar Indian Ocean']),
     (['PNG','SLB','VUT','NCL'],['#8da825','Melanesia']),
      (['FSM','MHL','MNP','GUM','PLW','NRU','KIR'],['#00008B','Micronesia']),
@@ -130,12 +129,12 @@ class nation:
     (['NPL','BTN'],['#ACD5F3','The Himilayas']),
      (['USA','CAN'],['#000080','Euro-North American Settler-Colonies']),
     (['MEX','BLZ','GTM','HND','SLV','NIC','CRI','PAN'],['#125454','Spanish-occupied Mexica']),
-    (['GUY','SUR','BRA'],['#F36196','Portuguese-Occupied Tupi-Guarani']),
+    (['BRA'],['#F36196','Portuguese-Occupied Tupi-Guarani']),
     (['ECU','PER','BOL','CHL'],['#C19A6B ','Spanish-Occupied Inca']),
    (['ARG','URY','PRY','FLK'],['#0d98ba ','Euro-Hispanic Occupied South-West America ']),
     (['VEN','COL'],['#C49102 ','Grand Colombia']),
     (['CUB','DMA','HTI','TCA','DOM','BHS','JAM','PRI','ATG','MSR',\
-        'KNA','VCT','TTO','BRB','GRD','LCA','CUW','ABW','AIA','CYM','MAF','SXM','VGB','VIR'],['#00A36C ','Caribbean'])]
+        'KNA','VCT','TTO','BRB','GRD','LCA','CUW','ABW','AIA','CYM','MAF','SXM','VGB','VIR','GUY','SUR'],['#00A36C ','Caribbean'])]
     
     c_dict = {i : v  for (li,v) in c_cat for i in li}
 
