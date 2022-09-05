@@ -116,12 +116,12 @@ class nation:
         'SRB','MNE','MDA','ROU','GEO','ARM'],['purple','The Orthodoxy']),
     (['ETH','ERI','SOM','DJI'],['#376550','Cushite']),
     (['CPV','CIV','GHA','NGA','BEN','TGO','BFA','LBR','SLE','GIN','SEN',\
-        'GNB','MLI','NER','CMR','GNQ','GAB','GMB','STP'],['#ff8c00','West Africa']),
-    (['CAF','COD','COG','UGA','KEN','TZA','ZMB','AGO','MWI',\
-        'MOZ','ZWE','NAM','BWA','RWA','BDI','SWZ'],['#FBC490','Bantu']),
+        'GNB','MLI','GMB','STP','CAF'],['#ff8c00','West Africa Niger-Congo']),
+    (['COD','COG','UGA','KEN','TZA','ZMB','AGO','MWI',\
+        'MOZ','ZWE','NAM','BWA','RWA','BDI','SWZ','GAB','GNQ','CMR'],['#FBC490','Benue-Congo Bantoid']),
     (['ZAF','LSO'],['black','South Africa']),
-    (['LBY','DZA','MAR','MRT','ESH','DZA','TUN','EGY','TCD'],['#00c300','North Africa']),
-    (['SDN','SSD'],['#FFCC00','Sudan']),
+    (['LBY','DZA','MAR','MRT','ESH','DZA','TUN','EGY','NER'],['#00c300','North Africa Afro-Asiatic']),
+    (['SDN','SSD','TCD'],['#FFCC00','Sudan Nilo-Saharan']),
     (['COM','MDG','MUS','IOT','SYC'],['#800020','Madagascar Indian Ocean']),
     (['PNG','SLB','VUT','NCL'],['#8da825','Melanesia']),
      (['FSM','MHL','MNP','GUM','PLW','NRU','KIR'],['#00008B','Micronesia']),
