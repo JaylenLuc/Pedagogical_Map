@@ -14,3 +14,7 @@ Otherwise, there is an autohotkey selenium module included that will automate th
 SELENIUM DOWNLOAD: https://github.com/florentbr/SeleniumBasic/releases/tag/v2.0.9.0
 
 CHROME DIRVER DOWNLOAD: https://sites.google.com/chromium.org/driver/downloads?authuser=0
+
+MAP INTERFACE:
+![image](https://user-images.githubusercontent.com/91278747/192134185-91a12aed-274d-4bee-a79f-065425bc16fb.png)
+
