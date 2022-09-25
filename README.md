@@ -24,7 +24,7 @@ Hover functionality for info:
 
 
 
-CLick functionality for news:
+Click functionality for news:
 
 ![image](https://user-images.githubusercontent.com/91278747/192134245-950d150e-0c1f-402d-bdb9-4df3feff5266.png)
 
