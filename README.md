@@ -1,5 +1,7 @@
 # Pedagogical_Map
 
+Intended for Desktop use only.
+
 static HTML file is up on git pages : https://jaylenluc.github.io/intermap_deploy/
 
 #NOTE:: ALL FILES REQUIRED MUST BE PUT IN SAME DIRECTORY
