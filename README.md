@@ -18,3 +18,13 @@ CHROME DIRVER DOWNLOAD: https://sites.google.com/chromium.org/driver/downloads?a
 MAP INTERFACE:
 ![image](https://user-images.githubusercontent.com/91278747/192134185-91a12aed-274d-4bee-a79f-065425bc16fb.png)
 
+Hover functionality for info:
+![image](https://user-images.githubusercontent.com/91278747/192134220-29aa5e2f-61f0-4f76-84dc-eec6ae2a95a0.png)
+
+
+
+
+CLick functionality for news:
+
+![image](https://user-images.githubusercontent.com/91278747/192134245-950d150e-0c1f-402d-bdb9-4df3feff5266.png)
+
