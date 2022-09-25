@@ -30,5 +30,6 @@ Click functionality for news:
 
 
 Drop down menu for map textures and toggle capital city and first level divisional city capital markers on:
-![image](https://user-images.githubusercontent.com/91278747/192134295-6683f4be-8a0d-43b9-9d37-681b6c8faaaa.png)
+![image](https://user-images.githubusercontent.com/91278747/192134680-5d9df7a7-c458-4079-8c21-1cf49a1269f8.png)
+
 
