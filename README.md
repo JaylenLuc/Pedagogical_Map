@@ -15,7 +15,7 @@ SELENIUM DOWNLOAD: https://github.com/florentbr/SeleniumBasic/releases/tag/v2.0.
 
 CHROME DIRVER DOWNLOAD: https://sites.google.com/chromium.org/driver/downloads?authuser=0
 
-MAP INTERFACE with dearch bar, drop down menu, and coordinates:
+MAP INTERFACE with search bar, drop down menu, and coordinates:
 ![image](https://user-images.githubusercontent.com/91278747/192134185-91a12aed-274d-4bee-a79f-065425bc16fb.png)
 
 Hover functionality for info:
@@ -29,6 +29,6 @@ Click functionality for news:
 ![image](https://user-images.githubusercontent.com/91278747/192134245-950d150e-0c1f-402d-bdb9-4df3feff5266.png)
 
 
-drop down menu for map textures and toggle captial city and first level divisional city capital markers on:
+Drop down menu for map textures and toggle capital city and first level divisional city capital markers on:
 ![image](https://user-images.githubusercontent.com/91278747/192134295-6683f4be-8a0d-43b9-9d37-681b6c8faaaa.png)
 
