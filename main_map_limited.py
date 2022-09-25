@@ -6,7 +6,7 @@ from io import BytesIO
 from urllib.request import urlopen
 import folium
 import pandas as pd
-import api_mod as api
+import api_mod_limited as api
 import time
 from folium.plugins import MousePosition
 import time

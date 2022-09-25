@@ -28,9 +28,11 @@ class server_fetch:
             with open('restcountries.json') as open_f: server_fetch.response = json.loads(open_f.read())
         except: server_fetch.response = requests.get('https://restcountries.com/v3.1/all').json()
         #server_fetch.news = requests.get('https://newsapi.org/v2/everything?domains=aljazeera.com,apnews.com,reuters.com,cfr.org,foreignpolicy.com&apiKey=9d00f1ed20454836b2b1b30b5f84530a').json()
-        server_fetch.hdi=pd.read_csv(io.StringIO(requests.get(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,\
+        try:
+            server_fetch.hdi=pd.read_csv(io.StringIO(requests.get(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,\
             'html.parser').find_all(text='HDI and components time-series')[0].parent['href']).content.decode('utf-8')))
-
+        except:
+            server_fetch.hdi = pd.read_csv(open('HDI_HDR2020_040722 (2).csv'))
         try:
             with open(r'owid-co2-data.json') as open_f: server_fetch.co2 = json.loads(open_f.read())
         except:
@@ -231,8 +233,10 @@ class server_fetch:
                     capital = server_fetch.response[i]['capital'][0]
                 except(KeyError):
                     capital = 'N/A'
-
-                year = int(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,'html.parser').find_all(text='HDI and components time-series')[0].parent['href'][46:50]) - 1
+                try:
+                    year = int(BeautifulSoup(requests.get('https://hdr.undp.org/data-center/documentation-and-downloads').text,'html.parser').find_all(text='HDI and components time-series')[0].parent['href'][46:50]) - 1
+                except:
+                    year = '2019'
                 
                 #print(code)
                  
